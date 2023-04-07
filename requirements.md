@@ -1,16 +1,16 @@
 # Functional Requirements
 
-1. **Connect with any external API**
+1. **Connect with any external API** (johanthon)
 2. Edit User Profiles
-3. Search Messages
-4. **Add ability to attach images to emails/ chat**
+3. Login account
+4. **Add ability to attach images to emails/ chat** (phillip)
 5. Send/unsend email
 6. Create items for checklist
-7. **Visualize Email Transmissions**
-8. Send/unsend chat message
+7. **Visualize Email Transmissions** (dorian)
+8. Change Account
 9. Signup account
-10. **Advance search items with regular expressions or filters by categories**
-11. Login account
+10. **Advance search items with regular expressions or filters by categories** (ryan)
+11. Search Messages
 12. Change/Recover Password
 
 ## Non-functional Requirements

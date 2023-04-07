@@ -1,6 +1,6 @@
 # Functional Requirements
 
-1. **Connect with any external API**
+1. **Connect with any external API** (johanthon)
 2. Edit User Profiles
 3. Search Messages
 4. **Add ability to attach images to emails/ chat**

@@ -5,7 +5,7 @@ Chatmail is a python email client with an integrated chat as well as a todo chec
 # Contributors
 
 - Johnathon Lu (@KueTone)
-- Dorian V(@Dorianv5)
+- Dorian Vail(@Dorianv5)
 - Phillip Nguyen (@PhillipNguyenCMPE)
 - Ryan Ayoubi (@ryanayoubi)
 

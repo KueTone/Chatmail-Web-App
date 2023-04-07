@@ -27,3 +27,18 @@
   <- Pair program on one part of the project. Driver will be the person responsible for that requirement.>
 
 - Group Progress Summary
+    
+### **2023-04-07 at 12:30 **
+
+- Team Members Attended
+  - Johnathon
+  - Dorian
+  - Ryan
+- Team Update (all in 15 min or less)
+
+  - <Johnathon> setting up Github repo and listing requirements. Will work on use case.
+  - <Dorian> worked on listing requirements. Will work on use case.
+  - <Ryan> worked on listing requirements. Will work on use case.
+
+- Group Progress Summary
+  - Setup and assigned the requirements. gave eachother a way to contact one another. Phillip wasn't here unofortunately so wasn't able to get his handle and he doesn't know what requirements he's doing. All of us will work on the functional requirement use cases.

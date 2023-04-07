@@ -9,7 +9,7 @@
 7. **Visualize Email Transmissions**
 8. Change Account
 9. Signup account
-10. **Advance search items with regular expressions or filters by categories**
+10. **Advance search items with regular expressions or filters by categories** (ryan)
 11. Search Messages
 12. Change/Recover Password
 

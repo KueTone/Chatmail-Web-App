@@ -9,7 +9,7 @@
 
 ## Meetings
 
-### 2020-04-20 at 24:00 <Template>
+### 2020-04-20 at 24:00 (Template)
 
 - Team Members Attended
   - Johnathon
@@ -28,7 +28,7 @@
 
 - Group Progress Summary
     
-### **2023-04-07 at 12:30 **
+### 2023-04-07 at 12:30 
 
 - Team Members Attended
   - Johnathon

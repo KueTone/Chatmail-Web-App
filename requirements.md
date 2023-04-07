@@ -3,10 +3,10 @@
 1. **Connect with any external API** (johanthon)
 2. Edit User Profiles
 3. Login account
-4. **Add ability to attach images to emails/ chat**
+4. **Add ability to attach images to emails/ chat** (phillip)
 5. Send/unsend email
 6. Create items for checklist
-7. **Visualize Email Transmissions**
+7. **Visualize Email Transmissions** (dorian)
 8. Change Account
 9. Signup account
 10. **Advance search items with regular expressions or filters by categories** (ryan)

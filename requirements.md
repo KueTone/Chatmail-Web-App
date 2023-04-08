@@ -1,6 +1,6 @@
 # Functional Requirements
 
-1. **Connect with any external API** (johanthon)
+1. **Connect with any external API** (johnathon)
 2. Edit User Profiles
 3. Login account
 4. **Add ability to attach images to emails/ chat** (phillip)
@@ -22,38 +22,87 @@
 
 ## Use Cases
 
-1. Use Case Name (Should match functional requirement name)
+### **Use Case: Connect with Github Rest API**
 
-- **Pre-condition:** <can be a list or short description> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+- **Pre-conditions:**
 
-- **Trigger:** <can be a list or short description> Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.
+  - The user is logged into the chat site
+  - The system is connected to the Rest API
+
+- **Trigger:**
+
+  - The user clicks "Connect to Github" to connect their accouct
 
 - **Primary Sequence:**
 
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Et sequi incidunt
-  3. Quis aute iure reprehenderit
-  4. ...
-  5. ...
-  6. ...
-  7. ...
-  8. ...
-  9. ...
-  10. <Try to stick to a max of 10 steps>
+  1. The user navigates to their profile
+  2. The user selects the option "Connect to Github"
+  3. The system sends a GET request to the GitHub REST API, passing the user's GitHub username as a parameter
+  4. The GitHub API processes the request and returns information about the user's GitHub profile, including their name, bio, number of followers, and other details
+  5. The chat site displays this information to the user by updating their profile
 
-- **Primary Postconditions:** <can be a list or short description>
+- **Primary Post-conditions:**
 
-- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+  - The user is able to view/edit their GitHub profile information on the chat site.
 
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
+- **Alternate Sequence:**
 
-- **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+  1. If the GitHub API is unavailable or returns an error, the chat site displays an error message and prompts the user to try again later.
+  2. If the user enters an invalid or non-existent GitHub username, the chat site displays an error message and prompts the user to enter a valid username.
 
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
+### **Use Case: Edit User Profiles**
 
-2. Use Case Name (Should match functional requirement name)
-   ...
+- **Pre-condition:**
+
+  - The user has already created an account
+  - The user is logged into their account
+
+- **Trigger:**
+
+  - The user initiates the change using a "Edit Profile" button
+
+- **Primary Sequence:**
+
+  1. The user navigates to their profile
+  2. The user selects the option "edit their profile"
+  3. Chatmail displays a form with the user's current information pre-populated in the fields
+  4. The user updates their profile information as desired, such as changing their name or profile picture
+  5. The user saves their changes by clicking a save button
+  6. Chatmail saves it to the database
+  7. Chatmail application displays the new information
+
+- **Primary Postconditions:**
+
+  - The user's profile information has been updated with the new information.
+
+- **Alternate Sequence:**
+
+  1. If Chatmail is unable to save the information due to conflicts such as username conflict, it will display an error message saying "username already taken"
+
+### **Use Case: Login Account**
+
+- **Pre-condition:**
+
+  - The user has an account with the system and the account information is stored in the database.
+
+- **Trigger**
+
+  - The user initiates the process by clicking "Login"
+
+- **Primary Sequence**
+
+  1. The user opens the login page of the system.
+  2. The system prompts the user to enter their username and password.
+  3. The user enters their username and password.
+  4. The system validates the user's credentials by checking them against the account information stored in the database.
+  5. If the credentials are valid, the system logs the user into their account and redirects them to the homepage of the system.
+
+- **Primary Postconditions:**
+
+  - The user successfully logs into their account is now able to chat and use all the other features.
+
+- **Alternate Sequence:**
+
+  1. If the credentials are invalid, the system displays an error message to the user and prompts them to try again.
+  2. If the system cannot validate the user's credentials due to a database error or other issue, it displays an error message to the user and prompts them to try again later.
+  3. If the user enters incorrect credentials multiple times, the system may lock their account or temporarily prevent them from attempting to log in again for security reasons. The system may also prompt the user to reset their password.

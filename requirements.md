@@ -11,7 +11,7 @@
 9. Signup account
 10. **Advance search items with regular expressions or filters by categories** (ryan)
 11. Search Messages
-12. Change/Recover Password
+12. Change Password
 
 ## Non-functional Requirements
 
@@ -169,3 +169,140 @@
 
   1. If there is an issue with either the username or password provided, the system will show an error
   2. If there is another user with the same username, the system will ask if they are an already existing user.
+
+### **Use Case: Attaching Images to Emails/Chat**
+
+- **Pre-condition:**
+
+  - User has an account and is logged in
+
+- **Trigger:**
+
+  - User has selected the option to “Compose” an email or to “Chat”
+
+- **Primary Sequence:**
+
+  1. The user opens the option to compose an email or chat with user(s)
+  2. User selects the attach image option
+  3. System prompts user to copy paste the image’s URL in a text box or to insert a file of the image
+  4. If the user selects the file insertion option, the system will open the user’s file explorer for them to select a file of the image
+  5. System checks if the URL or file is valid
+  6. System uploads the image in the email or chat if the URL or file is valid
+
+- **Primary Post-conditions:**
+
+  - User can delete the image or file or upload the image through email or chat
+
+- **Alternate Sequence:**
+
+  1. If the URL does not generate an image, the system will display an error message regarding the validation of the URL
+  2. If the file is not the correct type (JPEG, JPG, PNG), the system will display an error message regarding the file type
+  3. If the size of the file is too large, the system will display an error message regarding the size of the file and the maximum capacity
+
+### **Use Case: Sending Email**
+
+- **Pre-conditions:**
+
+  - User has an registered account and is logged in
+
+- **Trigger:**
+
+  - User has selected the “Compose” email option
+
+- **Primary sequence:**
+
+  1. User opens up the email composition text box
+  2. User types in the recipient’s email address
+  3. User enters in the contents of the email message
+  4. User clicks “Send” to send the email to the recipient
+
+- **Primary Post-conditions:**
+
+  - The recipient can see the email that was sent to them in their box
+  - The user can check if their email was sent or not
+
+- **Alternate Sequence:**
+
+  - If the email address entered for the recipient does not exist, the system will display an error message regarding the mismatched email input
+
+### **Use Case: Create Items for Checklist**
+
+- **Pre-condition:**
+
+  - User has an registered account and is logged in
+
+- **Trigger:**
+
+  - User has selected “Checklist” option
+
+- **Primary Sequence:**
+
+  1. User arrives at the Checklist page
+  2. User can navigate through a calendar to select a month and day for their checklist
+  3. User can type things to do in a list format
+  4. User can also input extra notes in a text box at the top of the list
+  5. After finishing the items for the checklist, user can save the list or choose to cancel it
+  6. If user chooses to save the checklist, system will prompt user to name the checklist
+
+- **Primary Post-conditions:**
+
+  - User has created and named a checklist on a calendar
+  - User can access that checklist and place or remove check markings on each item
+  - User can access checklist and add or remove items
+  - User can delete checklists from the calendar
+
+- **Alternate Sequence:**
+
+  - If the user’s item or title exceeds the maximum number of characters, the system will prompt an error message stating that the maximum number of characters has been reached
+
+### **Use Case: Search Messages**
+
+- **Pre-conditions:**
+
+  - The user is logged into the chat site
+
+- **Trigger:**
+
+  - The user selects the search field
+
+- **Primary Sequence:**
+
+  1. User enters String or Regex they want to search for
+  2. User selects any additional filters
+  3. Website displays any messages that contain what the user inputted
+
+- **Primary Post-conditions:**
+
+  - The user is able to view any of the messages that fit their search criteria
+
+- **Alternate Sequence:**
+
+  1. User searches for something not contained in any messages
+  2. Website displays no messages
+
+### **Use Case: Change Password**
+
+- **Pre-condition:**
+
+  - The user has already created an account
+  - The user is logged into their account
+
+- **Trigger:**
+
+  - The user selects “Change Password” in their profile settings
+
+- **Primary Sequence:**
+
+  1. The system prompts the user to enter their previous password and a new password twice
+  2. The user fills out the form, meeting whatever requirements the website has for password strength
+  3. The user confirms their input when they have decided on a new password
+  4. The system saves the users input as their new password
+
+- **Primary Postconditions:**
+
+  - The user's password has been changed
+
+- **Alternate Sequence:**
+
+  1. The user’s input for the new password is not the same in both text fields
+  2. The system does not allow them to confirm their decision and change their password.

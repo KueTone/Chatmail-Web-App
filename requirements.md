@@ -106,3 +106,66 @@
   1. If the credentials are invalid, the system displays an error message to the user and prompts them to try again.
   2. If the system cannot validate the user's credentials due to a database error or other issue, it displays an error message to the user and prompts them to try again later.
   3. If the user enters incorrect credentials multiple times, the system may lock their account or temporarily prevent them from attempting to log in again for security reasons. The system may also prompt the user to reset their password.
+
+1. Visualize Email Transmissions
+
+- **Pre-condition:** User has sent an Email
+
+- **Trigger:** The User has sent an email
+
+- **Primary Sequence:**
+
+  1. The user selects the option to send a message
+  2. The system confirms that the message has been sent
+  3. An animation plays to show the user that the sending was successful
+  4. The Animation ends and closes the draft of the message that was sent
+
+- **Primary Postconditions:** The User is returned to the page they were on before drafting the email
+
+- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+
+  1. If the Message send doesnt go through, an alternate animation will play
+  2. Then an error prompt will pop up to let the user know that the message was unable to send
+
+2. Change Account
+
+- **Pre-condition:** The User is signed in to their account
+
+- **Trigger:** The User selects the option to sign out
+
+- **Primary Sequence:**
+
+  1. The user is prompted to confirm that they want to sign out
+  2. Once signed out, the user is sent to the login page and prompted to sign in to their account
+
+- **Primary Postconditions:** 
+  
+  1. The user is signed out and able to sign into other accounts
+  2. The user is able to sign into other accounts
+
+- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+
+  1. if there is an issue logging the user out, the system can show an error method
+
+2. Use Case Name Sign-up Account
+  
+  - **Pre-condition:** The User has a valid username and password
+
+- **Trigger:** The User selects the option to create an account
+
+- **Primary Sequence:**
+
+  1. The user is prompted to enter their username and password that will be used for their account
+  2. The user confirms their information by pressing create account
+  3. The system will create an empty account with their login credentials
+  4. The system will open up the home page after logging in to their account
+
+- **Primary Postconditions:** 
+  
+  1. The user is signed in to their account and can email other users
+  2. The user is able to sign back out
+
+- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+
+  1. If there is an issue with either the username or password provided, the system will show an error
+  2. If there is another user with the same username, the system will ask if they are an already existing user.

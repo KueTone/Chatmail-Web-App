@@ -107,6 +107,91 @@
   2. If the system cannot validate the user's credentials due to a database error or other issue, it displays an error message to the user and prompts them to try again later.
   3. If the user enters incorrect credentials multiple times, the system may lock their account or temporarily prevent them from attempting to log in again for security reasons. The system may also prompt the user to reset their password.
 
+### **Use Case: Attaching Images to Emails/Chat**
+
+- **Pre-condition:**
+
+  - User has an account and is logged in
+
+- **Trigger:**
+
+  - User has selected the option to “Compose” an email or to “Chat”
+
+- **Primary Sequence:**
+
+  1. The user opens the option to compose an email or chat with user(s)
+  2. User selects the attach image option
+  3. System prompts user to copy paste the image’s URL in a text box or to insert a file of the image
+  4. If the user selects the file insertion option, the system will open the user’s file explorer for them to select a file of the image
+  5. System checks if the URL or file is valid
+  6. System uploads the image in the email or chat if the URL or file is valid
+
+- **Primary Post-conditions:**
+
+  - User can delete the image or file or upload the image through email or chat
+
+- **Alternate Sequence:**
+
+  1. If the URL does not generate an image, the system will display an error message regarding the validation of the URL
+  2. If the file is not the correct type (JPEG, JPG, PNG), the system will display an error message regarding the file type
+  3. If the size of the file is too large, the system will display an error message regarding the size of the file and the maximum capacity
+
+### **Use Case: Sending Email**
+
+- **Pre-conditions:**
+
+  - User has an registered account and is logged in
+
+- **Trigger:**
+
+  - User has selected the “Compose” email option
+
+- **Primary sequence:**
+
+  1. User opens up the email composition text box
+  2. User types in the recipient’s email address
+  3. User enters in the contents of the email message
+  4. User clicks “Send” to send the email to the recipient
+
+- **Primary Post-conditions:**
+
+  - The recipient can see the email that was sent to them in their box
+  - The user can check if their email was sent or not
+
+- **Alternate Sequence:**
+
+  - If the email address entered for the recipient does not exist, the system will display an error message regarding the mismatched email input
+
+### **Use Case: Create Items for Checklist**
+
+- **Pre-condition:**
+
+  - User has an registered account and is logged in
+
+- **Trigger:**
+
+  - User has selected “Checklist” option
+
+- **Primary Sequence:**
+
+  1. User arrives at the Checklist page
+  2. User can navigate through a calendar to select a month and day for their checklist
+  3. User can type things to do in a list format
+  4. User can also input extra notes in a text box at the top of the list
+  5. After finishing the items for the checklist, user can save the list or choose to cancel it
+  6. If user chooses to save the checklist, system will prompt user to name the checklist
+
+- **Primary Post-conditions:**
+
+  - User has created and named a checklist on a calendar
+  - User can access that checklist and place or remove check markings on each item
+  - User can access checklist and add or remove items
+  - User can delete checklists from the calendar
+
+- **Alternate Sequence:**
+
+  - If the user’s item or title exceeds the maximum number of characters, the system will prompt an error message stating that the maximum number of characters has been reached
+
 ### **Use Case: Search Messages**
 
 - **Pre-conditions:**

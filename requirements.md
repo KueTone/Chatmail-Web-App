@@ -11,7 +11,7 @@
 9. Signup account
 10. **Advance search items with regular expressions or filters by categories** (ryan)
 11. Search Messages
-12. Change/Recover Password
+12. Change Password
 
 ## Non-functional Requirements
 
@@ -106,3 +106,55 @@
   1. If the credentials are invalid, the system displays an error message to the user and prompts them to try again.
   2. If the system cannot validate the user's credentials due to a database error or other issue, it displays an error message to the user and prompts them to try again later.
   3. If the user enters incorrect credentials multiple times, the system may lock their account or temporarily prevent them from attempting to log in again for security reasons. The system may also prompt the user to reset their password.
+
+### **Use Case: Search Messages**
+
+- **Pre-conditions:**
+
+  - The user is logged into the chat site
+
+- **Trigger:**
+
+  - The user selects the search field
+
+- **Primary Sequence:**
+
+  1. User enters String or Regex they want to search for
+  2. User selects any additional filters
+  3. Website displays any messages that contain what the user inputted
+
+- **Primary Post-conditions:**
+
+  - The user is able to view any of the messages that fit their search criteria
+
+- **Alternate Sequence:**
+
+  1. User searches for something not contained in any messages
+  2. Website displays no messages
+
+### **Use Case: Change Password**
+
+- **Pre-condition:**
+
+  - The user has already created an account
+  - The user is logged into their account
+
+- **Trigger:**
+
+  - The user selects “Change Password” in their profile settings
+
+- **Primary Sequence:**
+
+  1. The system prompts the user to enter their previous password and a new password twice
+  2. The user fills out the form, meeting whatever requirements the website has for password strength
+  3. The user confirms their input when they have decided on a new password
+  4. The system saves the users input as their new password
+
+- **Primary Postconditions:**
+
+  - The user's password has been changed
+
+- **Alternate Sequence:**
+
+  1. The user’s input for the new password is not the same in both text fields
+  2. The system does not allow them to confirm their decision and change their password.

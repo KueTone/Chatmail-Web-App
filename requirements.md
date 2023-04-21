@@ -7,7 +7,7 @@
 5. Send/unsend email
 6. Create items for checklist
 7. **Visualize Email Transmissions** (dorian)
-8. Change Account
+8. Log Out of Account
 9. Create account
 10. **Advance search items with regular expressions or filters by categories** (ryan)
 11. Search Messages

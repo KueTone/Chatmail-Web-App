@@ -8,7 +8,7 @@
 6. Create items for checklist
 7. **Visualize Email Transmissions** (dorian)
 8. Change Account
-9. Signup account
+9. Create account
 10. **Advance search items with regular expressions or filters by categories** (ryan)
 11. Search Messages
 12. Change Password
@@ -107,7 +107,8 @@
   2. If the system cannot validate the user's credentials due to a database error or other issue, it displays an error message to the user and prompts them to try again later.
   3. If the user enters incorrect credentials multiple times, the system may lock their account or temporarily prevent them from attempting to log in again for security reasons. The system may also prompt the user to reset their password.
 
-### **Use Case: Visualize Email Transmission**
+### **Use Case: Visualize Email Transmissions**
+
 
 - **Pre-condition:** User has sent an Email
 
@@ -127,7 +128,9 @@
   1. If the Message send doesnt go through, an alternate animation will play
   2. Then an error prompt will pop up to let the user know that the message was unable to send
 
+
 ### **Use Case: Log Out of Account**
+
 
 - **Pre-condition:** The User is signed in to their account.
 
@@ -147,7 +150,7 @@
 
   1. if there is an issue logging the user out, the system can show an error method
 
-2. Use Case Name Sign-up Account
+### **Use Case: Create Account**
   
   - **Pre-condition:** The User has a valid username and password
 

@@ -107,7 +107,7 @@
   2. If the system cannot validate the user's credentials due to a database error or other issue, it displays an error message to the user and prompts them to try again later.
   3. If the user enters incorrect credentials multiple times, the system may lock their account or temporarily prevent them from attempting to log in again for security reasons. The system may also prompt the user to reset their password.
 
-1. Visualize Email Transmissions
+### **Use Case: Visualize Email Transmission**
 
 - **Pre-condition:** User has sent an Email
 
@@ -127,21 +127,21 @@
   1. If the Message send doesnt go through, an alternate animation will play
   2. Then an error prompt will pop up to let the user know that the message was unable to send
 
-2. Change Account
+### **Use Case: Log Out of Account**
 
-- **Pre-condition:** The User is signed in to their account
+- **Pre-condition:** The User is signed in to their account.
 
-- **Trigger:** The User selects the option to sign out
+- **Trigger:** The User selects the option to log out.
 
 - **Primary Sequence:**
 
-  1. The user is prompted to confirm that they want to sign out
-  2. Once signed out, the user is sent to the login page and prompted to sign in to their account
+  1. The user is prompted to confirm that they want to log out.
+  2. Once logged out, the user is sent to the home page of the website.
 
 - **Primary Postconditions:** 
   
-  1. The user is signed out and able to sign into other accounts
-  2. The user is able to sign into other accounts
+  1. The user is logged out and able to log in again.
+  2. The user is able to log into other accounts.
 
 - **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
 

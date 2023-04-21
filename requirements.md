@@ -15,14 +15,12 @@
 
 ## Non-functional Requirements
 
-1. **UI interactive interface (or using elements from bootstrap)**
-2. Only expected to work on Google Chrome
-3. **Multilingual Support**
-4. Only expected to work on computer screen (not mobile compatible)
+1. Only expected to work on Google Chrome
+2. **Multilingual Support**
 
 ## Use Cases
 
-### **Use Case: Connect with Github Rest API**
+### **Use Case: Update User Profile Using Github API**
 
 - **Pre-conditions:**
 
@@ -79,11 +77,12 @@
 
   1. If Chatmail is unable to save the information due to conflicts such as username conflict, it will display an error message saying "username already taken"
 
-### **Use Case: Login Account**
+### **Use Case: Login/Logout Account**
 
 - **Pre-condition:**
 
-  - The user has an account with the system and the account information is stored in the database.
+  - There are multiple accounts in database
+  - The user's account information is stored in the database.
 
 - **Trigger**
 
@@ -138,8 +137,8 @@
   1. The user is prompted to confirm that they want to sign out
   2. Once signed out, the user is sent to the login page and prompted to sign in to their account
 
-- **Primary Postconditions:** 
-  
+- **Primary Postconditions:**
+
   1. The user is signed out and able to sign into other accounts
   2. The user is able to sign into other accounts
 
@@ -148,8 +147,8 @@
   1. if there is an issue logging the user out, the system can show an error method
 
 ### **Use Case: Create Account**
-  
-  - **Pre-condition:** The User has a valid username and password
+
+- **Pre-condition:** The User has a valid username and password
 
 - **Trigger:** The User selects the option to create an account
 
@@ -160,8 +159,8 @@
   3. The system will create an empty account with their login credentials
   4. The system will open up the home page after logging in to their account
 
-- **Primary Postconditions:** 
-  
+- **Primary Postconditions:**
+
   1. The user is signed in to their account and can email other users
   2. The user is able to sign back out
 

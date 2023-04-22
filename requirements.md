@@ -7,7 +7,7 @@
 5. Send/unsend email
 6. Create items for checklist
 7. **Visualize Email Transmissions** (dorian)
-8. Log Out of Account
+8. Block User
 9. Create account
 10. **Advance search items with regular expressions or filters by categories** (ryan)
 11. Search Messages
@@ -107,21 +107,7 @@
   2. If the system cannot validate the user's credentials due to a database error or other issue, it displays an error message to the user and prompts them to try again later.
   3. If the user enters incorrect credentials multiple times, the system may lock their account or temporarily prevent them from attempting to log in again for security reasons. The system may also prompt the user to reset their password.
 
-### **Use Case: Visualize Email Transmissions**
 
-
-- **Pre-condition:** User has sent an Email
-
-- **Trigger:** The User has sent an email
-
-- **Primary Sequence:**
-
-  1. The user selects the option to send a message
-  2. The system confirms that the message has been sent
-  3. An animation plays to show the user that the sending was successful
-  4. The Animation ends and closes the draft of the message that was sent
-
-- **Primary Postconditions:** The User is returned to the page they were on before drafting the email
 
 - **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
 
@@ -129,26 +115,27 @@
   2. Then an error prompt will pop up to let the user know that the message was unable to send
 
 
-### **Use Case: Log Out of Account**
+### **Use Case: Filter Unwanted Messages**
 
 
 - **Pre-condition:** The User is signed in to their account.
 
-- **Trigger:** The User selects the option to log out.
+- **Trigger:** The User selects the option to filter incoming messages.
 
 - **Primary Sequence:**
 
-  1. The user is prompted to confirm that they want to log out.
-  2. Once logged out, the user is sent to the home page of the website.
+  1. The user is prompted to enter a word or phrase or another user's username that will be filtered for in incoming messages.
+  2. The system will search all future messages sent to the user to determine if they contain the set word or phrase or were sent by the chosen user.
+  3. The system will show these messages in a seperate inbox titled spam.
 
 - **Primary Postconditions:** 
   
-  1. The user is logged out and able to log in again.
-  2. The user is able to log into other accounts.
+  1. The user will not see any of the filtered messages in their main inbox.
+  2. The user is able to view all filtered messages in their spam inbox.
 
 - **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
 
-  1. if there is an issue logging the user out, the system can show an error method
+  1. if the input username does not match an existing user, the system will show an error and ask the user for a valid username.
 
 ### **Use Case: Create Account**
   

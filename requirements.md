@@ -15,14 +15,12 @@
 
 ## Non-functional Requirements
 
-1. **UI interactive interface (or using elements from bootstrap)**
-2. Only expected to work on Google Chrome
-3. **Multilingual Support**
-4. Only expected to work on computer screen (not mobile compatible)
+1. Only expected to work on Google Chrome
+2. **Multilingual Support**
 
 ## Use Cases
 
-### **Use Case: Connect with Github Rest API**
+### **Use Case: Update User Profile Using Github API**
 
 - **Pre-conditions:**
 
@@ -79,11 +77,12 @@
 
   1. If Chatmail is unable to save the information due to conflicts such as username conflict, it will display an error message saying "username already taken"
 
-### **Use Case: Login Account**
+### **Use Case: Login/Logout Account**
 
 - **Pre-condition:**
 
-  - The user has an account with the system and the account information is stored in the database.
+  - There are multiple accounts in database
+  - The user's account information is stored in the database.
 
 - **Trigger**
 
@@ -128,18 +127,20 @@
   2. The system will search all future messages sent to the user to determine if they contain the set word or phrase or were sent by the chosen user.
   3. The system will show these messages in a seperate inbox titled spam.
 
+
 - **Primary Postconditions:** 
   
   1. The user will not see any of the filtered messages in their main inbox.
   2. The user is able to view all filtered messages in their spam inbox.
+
 
 - **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
 
   1. if the input username does not match an existing user, the system will show an error and ask the user for a valid username.
 
 ### **Use Case: Create Account**
-  
-  - **Pre-condition:** The User has a valid username and password
+
+- **Pre-condition:** The User has a valid username and password
 
 - **Trigger:** The User selects the option to create an account
 
@@ -150,8 +151,8 @@
   3. The system will create an empty account with their login credentials
   4. The system will open up the home page after logging in to their account
 
-- **Primary Postconditions:** 
-  
+- **Primary Postconditions:**
+
   1. The user is signed in to their account and can email other users
   2. The user is able to sign back out
 

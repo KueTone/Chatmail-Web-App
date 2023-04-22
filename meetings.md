@@ -35,3 +35,16 @@
 
 - Group Progress Summary
   - Setup and assigned the requirements. gave eachother a way to contact one another. Phillip wasn't here unofortunately so wasn't able to get his handle and he doesn't know what requirements he's doing. All of us will work on the functional requirement use cases.
+
+### 2023-04-22 at 10:30
+
+- Team Members Attended
+  - Phillip
+  - Dorian
+- Team Update (Around 20 minutes)
+
+  - (Phillip) Working on implementing functional requirements
+  - (Dorian) Finishing up changes for Milestone 1 resubmission and implementing functional requirements
+
+- Group Progress Summary
+  - Brief meeting on finishing up Milestone 1 resubmission and discussing on what to do next. Further questions and implemention of functional requirements will be addressed later. Another meeting time is required to check-up on the progress of implementing functional requirements. 

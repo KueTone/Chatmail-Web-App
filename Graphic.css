@@ -95,7 +95,7 @@
   }
 .line{
   height: 5px;
-  width: 300px;
+  width: 100%;
   display:block;
   position: absolute;
   margin-top: 55px;
@@ -105,7 +105,7 @@
 }
 .line2{
   height: 5px;
-  width: 300px;
+  width: 100%;
   display:block;
   position: absolute;
   margin-top: 145px;

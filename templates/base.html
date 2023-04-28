@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>{% block title %} {% endblock %}- FlaskApp</title>
+    <title>Main Page Chatmail</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen" />
     <style>
       .post {
         padding: 10px;
@@ -11,8 +13,7 @@
       }
 
       nav a {
-        color: #d64161;
-        font-size: 3em;
+        color: #000000;
         margin-left: 50px;
         text-decoration: none;
       }
@@ -20,10 +21,25 @@
   </head>
   <body>
     <nav>
-      <a href="{{ url_for('index') }}">FlaskApp</a>
-      <a href="#">About</a>
+      <a href="{{ url_for('index') }}">ChatMail</a>
+      <a href="/welcome">Logout</a>
+
+      <a href="/profile">Profile</a>
     </nav>
     <hr />
     <div class="content">{% block content %} {% endblock %}</div>
   </body>
 </html>
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Main Page Chatmail</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen" />
+  </head>
+  <body>
+    
+  </body>
+</html> -->

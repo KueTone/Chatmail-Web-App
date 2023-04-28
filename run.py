@@ -1,19 +1,23 @@
-from flask import Flask, render_template, redirect, url_for, request
+import sqlite3
+from flask import Flask, render_template, request, url_for, flash, redirect
+
 app = Flask(__name__)
 
 
+def get_db_connection():
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
 @app.route('/')
-def home():
-    return render_template('index.html')
+def index():
+    conn = get_db_connection()
+    posts = conn.execute('SELECT * FROM posts').fetchall()
+    conn.close()
+    return render_template('index.html', posts=posts)
 
 
-# @app.route('/')
-# def welcome():
-#     return render_template('welcome.html')
-# # Route for handling the login page logic
-
-
-# Route for handling the login page logic
 @app.route('/welcome', methods=['GET', 'POST'])
 def login():
     error = None
@@ -22,7 +26,7 @@ def login():
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
             error = 'Invalid Credentials. Please try again.'
         else:
-            return redirect(url_for('home'))
+            return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
 

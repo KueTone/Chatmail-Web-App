@@ -1,4 +1,30 @@
-{% extends 'base.html' %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Main Page Chatmail</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen" />
+  </head>
+  <body>
+    
+    <div class="container">
+    <div class="header">
+      <nav>
+        <ul id="logout">
+          <li role="presentation" class="active">
+            <a href="/welcome">Logout</a>
+          </li>
+        </ul>
+        <ul id="profile page">
+          <li role="presentation" class="active">
+            <a href="/profile">Profile</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    
+    {% extends 'base.html' %} {% block content %}
 
 <h1>{% block title %} Posts {% endblock %}</h1>
 
@@ -11,3 +37,5 @@
 </div>
 
 {% endfor %} {% endblock %}
+  </body>
+</html>

@@ -1,32 +1,18 @@
-<html>
-  <head>
-    <title>Login page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Login</h1>
-      <br />
-      <form action="" method="post">
-        <input
-          type="text"
-          placeholder="Username"
-          name="username"
-          value="{{
-          request.form.username }}"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value="{{
-          request.form.password }}"
-        />
-        <input class="btn btn-default" type="submit" value="Login" />
-      </form>
-      {% if error %}
-      <p class="error"><strong>Error:</strong> {{ error }} {% endif %}</p>
-    </div>
-  </body>
-</html>
+{% extends "base.html"%}
+
+{% block content %}
+<h1>Sign In</h1>
+<form action="" method="POST" novalidate>
+    {{form.hidden_tag()}}
+    <p> {{form.username.label}} <br>
+       {{form.username(size=32)}}</p>
+
+    <p> {{form.password.label}} <br>
+       {{form.password(size=32)}}</p>
+
+    <p> {{form.remember_me.label}} <br>
+       {{form.remember_me()}}</p>
+
+    <p>{{form.submit()}}</p>
+</form>
+{% endblock %}

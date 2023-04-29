@@ -55,7 +55,7 @@ def login():
         return redirect('/')
     return render_template('login.html', form=form)
 
-
-@myapp_obj.route("/members/<string:name>/")
-def getMember(name):
-    return escape(name)
+@myapp_obj.route('/compose_email', methods=['GET', 'POST'])
+def compose_email():
+    #form = ComposeEmailForm()
+    return render_template('sendEmail.html')

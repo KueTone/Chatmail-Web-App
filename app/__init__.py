@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager
+from flask_mail import Mail, Message
 
 myapp_obj = Flask(__name__)
 
@@ -18,5 +19,14 @@ db = SQLAlchemy(myapp_obj)
 login = LoginManager(myapp_obj)
 
 login.login_view = 'login'
+
+mail = Mail(myapp_obj)
+
+myapp_obj.config['MAIL_SERVER'] = 'smtp.gmail.com'
+myapp_obj.config['MAIL_PORT'] = 465
+myapp_obj.config['MAIL_USE_SSL'] = True
+myapp_obj.config['MAIL_USERNAME'] = 'your_email@gmail.com'
+myapp_obj.config['MAIL_PASSWORD'] = 'your_password'
+myapp_obj.config['MAIL_DEFAULT_SENDER'] = 'your_email@gmail.com'
 
 from app import routes, models

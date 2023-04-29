@@ -3,10 +3,12 @@ from flask import redirect
 from flask import flash
 from .forms import LoginForm
 from app import myapp_obj
+from app import db
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
+from .models import User
 
 
 @myapp_obj.route('/')
@@ -31,10 +33,17 @@ def index():
 
 @myapp_obj.route('/profile')
 def profile():
-    return render_template('profile.html')
+    engine = db.create_engine('sqlite:///census.sqlite')
+    connection = engine.connect()
+    metadata = db.MetaData()
+    census = db.Table('census', metadata, autoload=True, autoload_with=engine)
+
+    query = db.select([census])
+
+    return render_template('profile.html', username=form.query, password=form.password, email='@sjsu.edu')
 
 
-@myapp_obj.route('/editProfile')
+@myapp_obj.route('/editProfile', methods=['GET', 'POST'])
 def editProfile():
     return render_template('editProfile.html')
 

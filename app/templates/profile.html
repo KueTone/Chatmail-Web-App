@@ -22,11 +22,15 @@
     <div class="container">
       <h1>User Profile</h1>
       <br />
+
       <p>
-        Name <br />
-        Email <br />
-        Profile <br />
+
+        Name: {{ username }}<br />
+        Email: {{email}} <br />
+        Password: {{password}} <br />
       </p>
+
+
       {% if error %}
       <p class="error"><strong>Error:</strong> {{ error }} {% endif %}</p>
     </div>

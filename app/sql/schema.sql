@@ -6,3 +6,8 @@ CREATE TABLE posts (
     title TEXT NOT NULL,
     content TEXT NOT NULL
 );
+
+CREATE TABLE account {
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    
+};

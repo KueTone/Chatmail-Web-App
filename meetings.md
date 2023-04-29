@@ -20,10 +20,10 @@
   <- Pair program on one part of the project. Driver will be the person responsible for that requirement.>
 
 - Group Progress Summary
-    
-### 2023-04-07 at 12:30 
 
-- Team Members Attended
+### 2023-04-07 at 12:30
+
+- Team Members Attended (class)
   - Johnathon
   - Dorian
   - Ryan
@@ -35,3 +35,17 @@
 
 - Group Progress Summary
   - Setup and assigned the requirements. gave eachother a way to contact one another. Phillip wasn't here unofortunately so wasn't able to get his handle and he doesn't know what requirements he's doing. All of us will work on the functional requirement use cases.
+
+### 2020-04-28 at 12:30
+
+- Team Members Attended (class)
+  - Johnathon
+  - Phillip
+  - Dorian
+  - Ryan
+- Team Update (all in 15 min or less)
+
+  - (Johnathon) worked on Login Logout page and started incorporating SQL into the webapp. Will continue working on it and the requirement edit profile.
+  - (Phillip) worked on creating email requirement. Once made, will make the send and unsend email as well as creating items for a checklist.
+  - (Dorian) worked on the create account function, it only reqiures database integration to save user info. created a delete option in our user profile page(not functional yet). Planning to integrate the account creation with the database.
+  - (Ryan) worked on searching the email. Finishing up the framework. Will continue working on that requirement and changing password through SQL.

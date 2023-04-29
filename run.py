@@ -1,44 +1,27 @@
-import sqlite3
-from flask import Flask, render_template, request, url_for, flash, redirect
+from app import myapp_obj
+# import os
+# from flask import Flask, render_template, request, url_for, flash, redirect
+# from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+# from sqlalchemy.sql import func
 
+# # absolute pathname of run.py
+# basedir = os.path.abspath(os.path.dirname(__file__))
 
-def get_db_connection():
-    conn = sqlite3.connect('sql/email.db')
-    conn.row_factory = sqlite3.Row
-    return conn
+# app = Flask(__name__)
 
+# app.config['SQLALCHEMY_DATABASE_URI'] =\
+#     'sqlite:///' + os.path.join(basedir, 'sql/email.db')
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-@app.route('/')
-def index():
-    conn = get_db_connection()
-    posts = conn.execute('SELECT * FROM posts').fetchall()
-    conn.close()
-    return render_template('index.html', posts=posts)
-
-
-@app.route('/welcome', methods=['GET', 'POST'])
-def login():
-    error = None
-    if request.method == 'POST':
-        # future change will incorporate a simple textfile database and maybe a SQL database if provded time
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('index'))
-    return render_template('login.html', error=error)
+# db = SQLAlchemy(app)
 
 
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
+# def get_db_connection():
+#     conn = sqlite3.connect('sql/email.db')
+#     conn.row_factory = sqlite3.Row
+#     return conn
 
 
-@app.route('/editProfile')
-def editProfile():
-    return render_template('editProfile.html')
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__"
+myapp_obj.run(debug=True)

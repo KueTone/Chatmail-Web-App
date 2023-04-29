@@ -79,3 +79,6 @@ def createAcct():
 @myapp_obj.route("/members/<string:name>/")
 def getMember(name):
     return escape(name)
+@myapp_obj.route("/compose_email", methods=['GET', 'POST'])
+def compose_email():
+        return render_template('sendEmail.html')

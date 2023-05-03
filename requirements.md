@@ -16,7 +16,7 @@
 ## Non-functional Requirements
 
 1. Only expected to work on Google Chrome
-2. **Multilingual Support**
+2. **Multilingual Support** -- English & Spanish
 
 ## Use Cases
 

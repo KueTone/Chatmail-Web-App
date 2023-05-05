@@ -63,17 +63,22 @@ def login():
             f'Here are the input {form.username.data} and {form.password.data}')
         return redirect('/')
     return render_template('login.html', form=form)
-@app.route('/create', methods=['POST'])
+@app.route('/create/', methods=('GET', 'POST'))
 def createAcct():
-   error = None
-        name = request.form['username']
-        user = new user()
-        set_password(user, request.form['password'])
-       if request.form['username'] == 'admin':
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User(username=username,
+                          password=password)
+        if request.form['username'] == 'admin':
            error = 'Username already in use. Please try again.'
-       else:
-           return redirect(url_for('home'))
-   return render_template('acctCreate.html', error = error)
+        else:
+            db.session.add(user)
+            db.session.commit()
+        return redirect(url_for('index'))
+
+    return render_template('createAcct.html', error = error)
 
 
 @myapp_obj.route("/members/<string:name>/")

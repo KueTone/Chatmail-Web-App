@@ -1,32 +1,21 @@
 <html>
-  <head>
-    <title>Create Account</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Create Account</h1>
-      <br />
-      <form action="" method="post">
-        <input
-          type="text"
-          placeholder="Username"
-          name="username"
-          value="{{
-          request.form.username }}"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value="{{
-          request.form.password }}"
-        />
-        <input class="btn btn-default" type="submit" value="Create" />
-      </form>
-      {% if error %}
-      <p class="error"><strong>Error:</strong> {{ error }} {% endif %}</p>
-    </div>
-  </body>
+    <h1 style="width: 100%">{% block title %} Add a New Student {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <label for="username">Username</label>
+            <input type="text" name="username"
+                   placeholder="Username">
+            </input>
+        </p>
+
+        <p>
+            <label for="password">Password</label>
+            <input type="text" name="password"
+                   placeholder="Password">
+            </input>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
 </html>

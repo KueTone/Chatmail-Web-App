@@ -31,9 +31,8 @@
 {% for post in posts %}
 
 <div class="post">
-  <p>{{ post['created'] }}</p>
-  <h2>{{ post['title'] }}</h2>
-  <p>{{ post['content'] }}</p>
+  <p><b>#{{ post.id }}</b></p>
+  <p>{{ post.body }}</p>
 </div>
 
 {% endfor %} {% endblock %}

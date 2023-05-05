@@ -11,6 +11,12 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(32), nullable=False)
     email = db.Column(db.String(100), nullable=False)
 
+    # profile
+    first = db.Column(db.String(32), nullable=False)
+    last = db.Column(db.String(32), nullable=False)
+    age = db.Column(db.Integer)
+    bio = db.Column(db.Text)
+
     posts = db.relationship('Post', backref='author', lazy='dynamic')
 
     def set_password(self, password):
@@ -20,7 +26,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return f'<user {self.id}: {self.username}>'
+        return f'<user {self.username}: {self.first}>'
 
 
 class Post(db.Model):
@@ -37,3 +43,4 @@ class Post(db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+

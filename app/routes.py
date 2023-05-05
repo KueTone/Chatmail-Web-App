@@ -8,16 +8,25 @@ from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
-from .models import User
+from .models import User, Post
 
+
+johnathon = User(username = 'kuetone',
+                password = 'password',
+                email='sammyshark@example.com',
+                first='Johnathon',
+                last='Lu',
+                age = 20,
+                bio='Marine biology student')
+
+email1 = Post(body = 'asdfjk l;qwe ruiopzx cvnm,.',
+              user_id = 'johnathon')
 
 @myapp_obj.route('/')
 def index():
-    # conn = get_db_connection()
-    # posts = conn.execute('SELECT * FROM posts').fetchall()
-    # conn.close()
-    return render_template('index.html')
-
+    # users = User.query.all()
+    posts = Post.query.all()
+    return render_template('index.html', posts=posts)
 
 # @myapp_obj.route('/welcome', methods=['GET', 'POST'])
 # def login():

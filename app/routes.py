@@ -33,19 +33,20 @@ def index():
 #     return render_template('login.html', error=error)
 
 
-@myapp_obj.route('/profile')
-def profile():
-    engine = db.create_engine('sqlite:///census.sqlite')
-    connection = engine.connect()
-    metadata = db.MetaData()
-    census = db.Table('census', metadata, autoload=True, autoload_with=engine)
+@myapp_obj.route('/profile/<username>/')
+@login_required
+def profile(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
 
-    query = db.select([census])
-
-    return render_template('profile.html', username=form.query, password=form.password, email='@sjsu.edu')
+    return render_template('profile.html', user = user, posts = posts)
 
 
 @myapp_obj.route('/editProfile', methods=['GET', 'POST'])
+@login_required
 def editProfile():
     return render_template('editProfile.html')
 

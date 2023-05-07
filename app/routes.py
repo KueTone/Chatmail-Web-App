@@ -1,6 +1,8 @@
 from flask import render_template
 from flask import redirect
 from flask import flash
+from flask import url_for
+from flask import request
 from .forms import LoginForm
 from app import myapp_obj
 from app import db
@@ -9,20 +11,11 @@ from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
 from .models import User, Post
-
-
-johnathon = User(username = 'kuetone',
-                password = 'password',
-                email='sammyshark@example.com',
-                first='Johnathon',
-                last='Lu',
-                age = 20,
-                bio='Marine biology student')
-
-email1 = Post(body = 'asdfjk l;qwe ruiopzx cvnm,.',
-              user_id = 'johnathon')
+from werkzeug.urls import url_parse
 
 @myapp_obj.route('/')
+@myapp_obj.route('/index')
+@login_required
 def index():
     # users = User.query.all()
     posts = Post.query.all()
@@ -56,23 +49,30 @@ def profile():
 def editProfile():
     return render_template('editProfile.html')
 
-
-@myapp_obj.route("/welcome", methods=['GET', 'POST'])
+# @app.route('/welcome', methods=['GET', 'POST'])
+@myapp_obj.route('/login', methods=['GET', 'POST'])
 def login():
-    # create form
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = LoginForm()
-    # if form inputs are valid
     if form.validate_on_submit():
-        # search database for username
-        # user = User.query.filter_by(...)
-        # check the password
-        # if password matches
-        # login_user(user)
-        flash(
-            f'Here are the input {form.username.data} and {form.password.data}')
-        return redirect('/')
-    return render_template('login.html', form=form)
+        flash('Login requested for user: {}, password: {}, remember_me={}'.format(form.username.data, form.password.data, form.remember_me.data))
+        user = User.query.filter_by(username=form.username.data).first()
+        # pass = User.query.filter_by(password=form.password.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password: {}'.format(user))
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
+    return render_template('login.html', title='Sign In', form=form)
 
+@myapp_obj.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @myapp_obj.route("/members/<string:name>/")
 def getMember(name):

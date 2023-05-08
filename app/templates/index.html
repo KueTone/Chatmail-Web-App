@@ -27,18 +27,12 @@
 {% extends 'base.html' %} {% block content %}
 
 <h1>Hello, {{ current_user.first }}!</h1>
-{% for post in posts %}
-<div>
-  <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
-</div>
-{% endfor %}
-
-<h1>{% block title %} Email {% endblock %}</h1>
+<h2> Chat </h2>
 
 {% for post in posts %}
 
 <div class="post">
-  <p><b>{{ post.author.username }}</b> Today: {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} </p>
+  <p><b><img src = "{{ post.author.avatar(15) }}">{{ post.author.username }}</b> {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} </p>
   <p>{{ post.body }}</p>
 </div>
 

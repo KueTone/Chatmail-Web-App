@@ -3,7 +3,7 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
-from .forms import LoginForm
+from .forms import LoginForm, EditProfileForm
 from app import myapp_obj
 from app import db
 from flask_login import current_user
@@ -14,10 +14,9 @@ from .models import User, Post
 from werkzeug.urls import url_parse
 
 @myapp_obj.route('/')
-@myapp_obj.route('/index')
+@myapp_obj.route('/index/')
 @login_required
 def index():
-    # users = User.query.all()
     posts = Post.query.all()
     return render_template('index.html', posts=posts)
 
@@ -47,8 +46,22 @@ def profile(username):
 
 @myapp_obj.route('/editProfile', methods=['GET', 'POST'])
 @login_required
-def editProfile():
-    return render_template('editProfile.html')
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.username   = form.username.data
+        current_user.password   = form.password.data
+        current_user.bio        = form.bio.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('edit_profile'))
+    elif request.method == 'GET':
+        form.username.data      = current_user.username
+        form.password.data      = current_user.password
+        form.email.data         = current_user.email
+        form.bio.data           = current_user.bio
+    return render_template('editProfile.html', title='Edit Profile',
+                           form=form)
 
 # @app.route('/welcome', methods=['GET', 'POST'])
 @myapp_obj.route('/login', methods=['GET', 'POST'])
@@ -73,7 +86,7 @@ def login():
 @myapp_obj.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @myapp_obj.route("/members/<string:name>/")
 def getMember(name):

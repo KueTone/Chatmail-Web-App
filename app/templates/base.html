@@ -21,7 +21,7 @@
   </head>
   <body>
     <nav>
-      <a href="{{ url_for('index') }}">ChatMail</a>
+      <b><a href="{{ url_for('index') }}">ChatMail</a></b>
 
       {% if current_user.is_anonymous %}
       <a href="{{ url_for('login') }}">Login</a>

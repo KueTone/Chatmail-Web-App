@@ -50,15 +50,20 @@ def edit_profile():
     form = EditProfileForm()
     if form.validate_on_submit():
         current_user.username   = form.username.data
-        current_user.password   = form.password.data
+        #current_user.password   = form.password.data
+        current_user.email      = form.email.data
+        current_user.first      = form.first.data
+        current_user.last       = form.last.data
         current_user.bio        = form.bio.data
         db.session.commit()
         flash('Your changes have been saved.')
-        return redirect(url_for('edit_profile'))
+        return redirect(url_for('profile', username = current_user.username))
     elif request.method == 'GET':
         form.username.data      = current_user.username
-        form.password.data      = current_user.password
+        #form.password.data      = current_user.password
         form.email.data         = current_user.email
+        form.first.data         = current_user.first
+        form.last.data          = current_user.last
         form.bio.data           = current_user.bio
     return render_template('editProfile.html', title='Edit Profile',
                            form=form)

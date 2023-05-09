@@ -48,9 +48,11 @@ def profile(username):
 @login_required
 def edit_profile():
     form = EditProfileForm()
+    # form2 = ChangePasswordForm(username='test.user', changing=True, title=title)
+
     if form.validate_on_submit():
         current_user.username   = form.username.data
-        #current_user.password   = form.password.data
+        current_user.password   = current_user.set_password(form.password.data)
         current_user.email      = form.email.data
         current_user.first      = form.first.data
         current_user.last       = form.last.data
@@ -60,7 +62,7 @@ def edit_profile():
         return redirect(url_for('profile', username = current_user.username))
     elif request.method == 'GET':
         form.username.data      = current_user.username
-        #form.password.data      = current_user.password
+        form.password.data      = current_user.password
         form.email.data         = current_user.email
         form.first.data         = current_user.first
         form.last.data          = current_user.last

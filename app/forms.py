@@ -7,6 +7,12 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
+    
+class ComposeEmailForm(FlaskForm):
+    recipient_email = StringField('Recipient Email', validators=[DataRequired()])
+    subject = StringField('Subject', validators=[DataRequired()])
+    body = StringField('Body', validators=[DataRequired()])
+    send = SubmitField('Send')    
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username')

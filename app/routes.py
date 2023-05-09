@@ -50,7 +50,8 @@ def edit_profile(section):
         if section == 'username':
             current_user.username   = form.username.data
         elif section == 'password':
-            current_user.password   = current_user.set_password(form.password.data)
+            current_user.set_password(form.password.data)
+            # flash(form.password.data)
         elif section == 'email':
             current_user.email      = form.email.data
         elif section == 'first':

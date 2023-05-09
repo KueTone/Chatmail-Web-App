@@ -17,8 +17,9 @@ from werkzeug.urls import url_parse
 @myapp_obj.route('/index/')
 @login_required
 def index():
+    users = User.query.all()
     posts = Post.query.all()
-    return render_template('index.html', posts=posts)
+    return render_template('index.html', users=users, posts=posts)
 
 # @myapp_obj.route('/welcome', methods=['GET', 'POST'])
 # def login():
@@ -36,39 +37,39 @@ def index():
 @login_required
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
 
-    return render_template('profile.html', user = user, posts = posts)
+    return render_template('profile.html', user = user)
 
 
-@myapp_obj.route('/editProfile', methods=['GET', 'POST'])
+@myapp_obj.route('/editProfile/<section>/', methods=['GET', 'POST'])
 @login_required
-def edit_profile():
+def edit_profile(section):
     form = EditProfileForm()
-    # form2 = ChangePasswordForm(username='test.user', changing=True, title=title)
 
     if form.validate_on_submit():
-        current_user.username   = form.username.data
-        current_user.password   = current_user.set_password(form.password.data)
-        current_user.email      = form.email.data
-        current_user.first      = form.first.data
-        current_user.last       = form.last.data
-        current_user.bio        = form.bio.data
+        if section == 'username':
+            current_user.username   = form.username.data
+        elif section == 'password':
+            current_user.password   = current_user.set_password(form.password.data)
+        elif section == 'email':
+            current_user.email      = form.email.data
+        elif section == 'first':
+            current_user.first      = form.first.data
+        elif section == 'last':
+            current_user.last       = form.last.data
+        elif section == 'bio':
+            current_user.bio        = form.bio.data
         db.session.commit()
         flash('Your changes have been saved.')
         return redirect(url_for('profile', username = current_user.username))
     elif request.method == 'GET':
         form.username.data      = current_user.username
-        form.password.data      = current_user.password
+        # form.password.data      = current_user.password
         form.email.data         = current_user.email
         form.first.data         = current_user.first
         form.last.data          = current_user.last
         form.bio.data           = current_user.bio
-    return render_template('editProfile.html', title='Edit Profile',
-                           form=form)
+    return render_template('editProfile.html', title='Edit Profile', form=form, section=section)
 
 # @app.route('/welcome', methods=['GET', 'POST'])
 @myapp_obj.route('/login', methods=['GET', 'POST'])

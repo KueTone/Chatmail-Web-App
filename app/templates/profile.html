@@ -5,21 +5,47 @@
 <head>
   <title>User Profile Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="static/bootstrap.min.css" rel="stylesheet" media="screen" />
 </head>
 <body>
   <h1> 
     <img src = "{{ user.avatar(60) }}">
     {{ user.username }} 
   </h1>
-  <p>
-    Username: {{ user.username }} <br>
-    Email: {{ user.email}} <br> 
-    Password: {{ user.password }} <br>
-    First Name: {{ user.first }} <br>
-    Last Name: {{ user.last }} <br>
-    Age: {{ user.age }} <br>
-    About me: {{ user.bio }} <br>
+    Username: {{ user.username }}
+    {% if user == current_user %}
+    <a href="{{ url_for('edit_profile', section='username') }}">Edit</a>
+    {% endif %}
+    <br>
+    Email: {{ user.email}} 
+    {% if user == current_user %}
+    <a href="{{ url_for('edit_profile', section='email') }}">Edit</a>
+    {% endif %}
+    <br>
+    Password: ******
+    {% if user == current_user %}
+    <a href="{{ url_for('edit_profile', section='password') }}">Edit</a>
+    {% endif %}
+    <br>
+    First Name: {{ user.first }} 
+    {% if user == current_user %}
+    <a href="{{ url_for('edit_profile', section='first') }}">Edit</a>
+    {% endif %}
+    <br>
+    Last Name: {{ user.last }} 
+    {% if user == current_user %}
+    <a href="{{ url_for('edit_profile', section='last') }}">Edit</a>
+    {% endif %}
+    <br>
+    Age: {{ user.age }} 
+    {% if user == current_user %}
+    <a href="{{ url_for('edit_profile', section='age') }}">Edit</a>
+    {% endif %}
+    <br>
+    About me: {{ user.bio }} 
+    {% if user == current_user %}
+    <a href="{{ url_for('edit_profile', section='bio') }}">Edit</a>
+    {% endif %}
+    <br>
   </p>
   <hr>
   {% for post in posts %}
@@ -28,8 +54,6 @@
   {{ post.author.username }} says: <b>{{ post.body }}</b>
   </p>
   {% endfor %}
-  {% if user == current_user %}
-  <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-  {% endif %}
+
 </body>
 {% endblock %}

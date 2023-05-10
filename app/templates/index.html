@@ -18,7 +18,7 @@
   
     {% endfor %} 
     </div>
-    
+
       <div class="col-md-4">
         <div class="position-sticky" style="top: 2rem;">
           <div class="p-4 mb-3 bg-body-tertiary rounded">
@@ -27,7 +27,7 @@
               {% for user in users %}
 
               <br class="post">
-                <p><img src = "{{ user.avatar(15) }}"> <b>{{ user.username }}</b> </p>
+                <p><img src = "{{ user.avatar(15) }}"> <a href="#"><b>{{ user.username }}</b></a> </p>
                 {% endfor %} 
           </div>
 

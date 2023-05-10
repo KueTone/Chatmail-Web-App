@@ -14,8 +14,7 @@ from .models import User, Post
 from werkzeug.urls import url_parse
 
 @myapp_obj.route('/')
-@myapp_obj.route('/index/')
-@login_required
+@myapp_obj.route('/index')
 def index():
     users = User.query.all()
     posts = Post.query.all()
@@ -95,7 +94,7 @@ def login():
 @myapp_obj.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 @myapp_obj.route("/members/<string:name>/")
 def getMember(name):

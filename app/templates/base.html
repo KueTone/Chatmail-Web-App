@@ -4,15 +4,12 @@
     <title>Main Page Chatmail</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="/static/bootstrap.min.css" rel="stylesheet" media="all" />
-    
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.111.3">
-    <title>Blog Template · Bootstrap v5.3</title>
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" media="all" />
+    <link href="{{ url_for('static', filename='blog.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
     <style>
@@ -96,8 +93,6 @@
 
         <!-- Custom styles for this template -->
         <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="/static/blog.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -136,16 +131,16 @@
       
     </div>
     <hr />
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-            <li>{{ message }} </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-{% endwith %}
-{% block content %} {% endblock %}
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+          {% for message in messages %}
+              <li>{{ message }} </li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
   </body>
 </html>
 <!-- 

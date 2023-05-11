@@ -22,8 +22,8 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.Text, nullable=True)
     profilePic = db.Column(db.String(),  nullable=True)
 
-    author = db.relationship('Post', backref='author', lazy='dynamic', foreign_keys='Post.receive_id')
     recipient = db.relationship('Post', backref='receiver', lazy='dynamic', foreign_keys='Post.author_id')
+    author = db.relationship('Post', backref='author', lazy='dynamic', foreign_keys='Post.receive_id')
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -45,11 +45,7 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     
     receive_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    
-
-    
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)    
 
     def __repr__(self):
         return f'<Post {self.id}: {self.body}>'

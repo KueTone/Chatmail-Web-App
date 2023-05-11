@@ -68,10 +68,11 @@ def edit_profile(section):
             saver = request.files['profilePic']
             
             current_user.profilePic = picName
+            saver.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], picName))
+
             
 
         db.session.commit()
-        saver.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], picName))
         
         flash('Your changes have been saved.')
         return redirect(url_for('profile', username = current_user.username))

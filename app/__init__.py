@@ -4,7 +4,7 @@ import os
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_change_password import ChangePassword, ChangePasswordForm, SetPasswordForm
-
+import sys
 
 myapp_obj = Flask(__name__)
 
@@ -15,7 +15,14 @@ myapp_obj.config.from_mapping(
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db'),
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 )
-UPLOAD_FOLDER = 'app\static\images'
+
+if sys.platform != 'darwin':
+# Windows pathing
+    UPLOAD_FOLDER = 'app\static\images'
+# Mac pathing
+else:
+    UPLOAD_FOLDER = 'app/static/images'
+
 myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 

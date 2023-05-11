@@ -13,41 +13,43 @@
       
 
         <div class ="col-7">
-          <p class="card-text" align="center">
-            Username: {{ user.username }}
+          <h3>{{ user.first }}'s Dashboard </h3>
+          <p class="card-text" style="width: 90%; word-wrap:break-word">
+            
+            <strong>Username: </strong>{{ user.username }}
             {% if user == current_user %}
             <a href="{{ url_for('edit_profile', section='username') }}">Edit</a>
   
             <br>
-            Profile Pic: {{ user.profilePic }}
+            <strong>Profile Pic:</strong> {{ user.profilePic }}
             
             <br>
-            Email: {{ user.email}} 
+            <strong>Email:</strong> {{ user.email}} 
   
             <a href="{{ url_for('edit_profile', section='email') }}">Edit</a>
   
             <br>
-            Password: ******
+            <strong>Password:</strong> ******
   
             <a href="{{ url_for('edit_profile', section='password') }}">Edit</a>
   
             <br>
-            First Name: {{ user.first }} 
+            <strong>First Name:</strong> {{ user.first }} 
   
             <a href="{{ url_for('edit_profile', section='first') }}">Edit</a>
   
             <br>
-            Last Name: {{ user.last }} 
+            <strong>Last Name:</strong> {{ user.last }} 
   
             <a href="{{ url_for('edit_profile', section='last') }}">Edit</a>
   
             <br>
-            Age: {{ user.age }} 
+            <strong>Age:</strong> {{ user.age }} 
   
             <a href="{{ url_for('edit_profile', section='age') }}">Edit</a>
   
             <br>
-            About me: {{ user.bio }} 
+            <strong>About me:</strong> {{ user.bio }} 
   
             <a href="{{ url_for('edit_profile', section='bio') }}">Edit</a>
   

@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length
 
@@ -17,3 +18,4 @@ class EditProfileForm(FlaskForm):
     bio = TextAreaField('About me')
     age = IntegerField('Age')
     submit = SubmitField('Save Changes')
+    profilePic = FileField("Profile Pic")

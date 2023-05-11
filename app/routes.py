@@ -50,7 +50,6 @@ def edit_profile(section):
             current_user.username   = form.username.data
         elif section == 'password':
             current_user.set_password(form.password.data)
-            # flash(form.password.data)
         elif section == 'email':
             current_user.email      = form.email.data
         elif section == 'first':
@@ -59,16 +58,18 @@ def edit_profile(section):
             current_user.last       = form.last.data
         elif section == 'bio':
             current_user.bio        = form.bio.data
+        elif section =='profilePic':
+            current_user.profilePic = form.profilePic.data
         db.session.commit()
         flash('Your changes have been saved.')
         return redirect(url_for('profile', username = current_user.username))
     elif request.method == 'GET':
-        form.username.data      = current_user.username
-        # form.password.data      = current_user.password
-        form.email.data         = current_user.email
-        form.first.data         = current_user.first
-        form.last.data          = current_user.last
-        form.bio.data           = current_user.bio
+        form.username.data          = current_user.username
+        form.email.data             = current_user.email
+        form.first.data             = current_user.first
+        form.last.data              = current_user.last
+        form.bio.data               = current_user.bio
+        form.profilePic.data        = current_user.profilePic
     return render_template('editProfile.html', title='Edit Profile', form=form, section=section)
 
 # @app.route('/welcome', methods=['GET', 'POST'])
@@ -94,7 +95,14 @@ def login():
 @myapp_obj.route('/logout')
 def logout():
     logout_user()
+    flash('You are being logged out...')
     return redirect(url_for('index'))
+
+@myapp_obj.route('/delete')
+def delete_user(id):
+    
+    return render_template(url_for('index'))
+    
 
 @myapp_obj.route("/members/<string:name>/")
 def getMember(name):

@@ -35,7 +35,7 @@ alicia = User(username = 'al',
                 age = 19,
                 bio='aviation')
 
-u = User(username = 'user', password = 'pass', email = 'user@example.com', first = 'us', last = 'er', age = 10, bio = 'useranem example')
+u = User(username = 'ExampleUser', password = 'pass', email = 'user@example.com', first = 'us', last = 'er', age = 10, bio = 'This is an example of a user's profile and information')
 # use:
 # u = User.query.get(2)
 # author = u
@@ -49,3 +49,5 @@ email3 = Post(body = 'Big word register babes.', user_id = 2)
 
 email4 = Post(body = 'What have you done??!??',
               author = johnathon)
+
+email5 = Post(body = 'Why am I here??!??', receive=1, user_id=2)

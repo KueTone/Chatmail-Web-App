@@ -1,5 +1,4 @@
 from flask import Flask
-from .config import Config
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager
@@ -11,9 +10,15 @@ myapp_obj = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
     
-myapp_obj.config.from_object(Config)
+myapp_obj.config.from_mapping(
+    SECRET_KEY = 'you-will-never-guess',
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db'),
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+)
+UPLOAD_FOLDER = 'app\static\images'
+myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-UPLOAD_FOLDER = 'static/images/'
+
 flask_change_password = ChangePassword(min_password_length=1, rules=None)
 flask_change_password.init_app(myapp_obj)
 

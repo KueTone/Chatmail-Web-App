@@ -19,8 +19,7 @@
             <a href="{{ url_for('edit_profile', section='username') }}">Edit</a>
   
             <br>
-            Profile Pic:
-            {{ user.profilePic }}
+            Profile Pic: {{ user.profilePic }}
             
             <br>
             Email: {{ user.email}} 
@@ -54,13 +53,27 @@
   
             <br>
 
-            <a href="{{ url_for('delete_user')}}"> DELETE USER</a>
+            <a href="{{ url_for('delete_user', id=current_user)}}"> DELETE USER</a>
             {% endif %}
           </p>
           
         </div>
         <div class = "col-5">
+          {% if user.profilePic == None %}
+
           <img src = "{{ url_for('static', filename='images/default.png') }}" width="225" align="center">
+          
+          {% else %}
+          
+          <img src = "{{ url_for('static', filename='images/' + user.profilePic) }}" width="225" align="center">
+
+          {% endif %}
+          {% if user == current_user %}
+          
+          <br>
+          <a href="{{ url_for('edit_profile', section='profilePic')}}">Edit</a>
+
+          {% endif %}
           </div>
     </div>
     </div>

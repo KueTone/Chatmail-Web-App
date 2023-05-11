@@ -12,6 +12,9 @@ from flask_login import logout_user
 from flask_login import login_required
 from .models import User, Post
 from werkzeug.urls import url_parse
+from werkzeug.utils import secure_filename
+import uuid as uuid
+import os
 
 @myapp_obj.route('/')
 @myapp_obj.route('/index')
@@ -45,7 +48,7 @@ def profile(username):
 def edit_profile(section):
     form = EditProfileForm()
 
-    if form.validate_on_submit():
+    if request.method == 'POST':
         if section == 'username':
             current_user.username   = form.username.data
         elif section == 'password':
@@ -59,8 +62,17 @@ def edit_profile(section):
         elif section == 'bio':
             current_user.bio        = form.bio.data
         elif section =='profilePic':
-            current_user.profilePic = form.profilePic.data
+            current_user.profilePic = request.files['profilePic']
+            picFilename = secure_filename(current_user.profilePic.filename)
+            picName = str(uuid.uuid1()) +"_"+ picFilename
+            saver = request.files['profilePic']
+            
+            current_user.profilePic = picName
+            
+
         db.session.commit()
+        saver.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], picName))
+        
         flash('Your changes have been saved.')
         return redirect(url_for('profile', username = current_user.username))
     elif request.method == 'GET':
@@ -69,7 +81,6 @@ def edit_profile(section):
         form.first.data             = current_user.first
         form.last.data              = current_user.last
         form.bio.data               = current_user.bio
-        form.profilePic.data        = current_user.profilePic
     return render_template('editProfile.html', title='Edit Profile', form=form, section=section)
 
 # @app.route('/welcome', methods=['GET', 'POST'])
@@ -98,10 +109,10 @@ def logout():
     flash('You are being logged out...')
     return redirect(url_for('index'))
 
-@myapp_obj.route('/delete')
+@myapp_obj.route('/delete/<id>/')
 def delete_user(id):
     
-    return render_template(url_for('index'))
+    return redirect(url_for('index'))
     
 
 @myapp_obj.route("/members/<string:name>/")

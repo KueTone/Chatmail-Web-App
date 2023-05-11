@@ -12,7 +12,7 @@
     {% for post in posts %}
   
     <div class="post">
-      <p><img src = "{{ post.author.avatar(15) }}"> <b>{{ post.author.username }}</b> {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} </p>
+      <p><img src = "{{ post.author.avatar(15) }}"> <b>{{ post.author.username }}</b> {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} to <b>{{ post.receiver.username }}</b></p>
       <p>{{ post.body }}</p>
     </div>
   

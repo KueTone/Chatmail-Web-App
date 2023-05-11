@@ -4,21 +4,26 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import login
 from hashlib import md5
 from flask_login import UserMixin
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
+
 
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), nullable=False)
     password = db.Column(db.String(32), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=True)
 
     # profile
-    first = db.Column(db.String(32), nullable=False)
-    last = db.Column(db.String(32), nullable=False)
-    age = db.Column(db.Integer)
-    bio = db.Column(db.Text)
+    first = db.Column(db.String(32), nullable=True)
+    last = db.Column(db.String(32), nullable=True)
+    age = db.Column(db.Integer, nullable=True)
+    bio = db.Column(db.Text, nullable=True)
+    profilePic = db.Column(db.String(),  nullable=True)
 
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    author = db.relationship('Post', backref='author', lazy='dynamic', foreign_keys='Post.receive_id')
+    recipient = db.relationship('Post', backref='receiver', lazy='dynamic', foreign_keys='Post.author_id')
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -38,8 +43,13 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(256))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    receive_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
+
+    
 
     def __repr__(self):
         return f'<Post {self.id}: {self.body}>'

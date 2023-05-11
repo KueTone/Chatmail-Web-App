@@ -13,6 +13,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
     
 myapp_obj.config.from_object(Config)
 
+UPLOAD_FOLDER = 'static/images/'
 flask_change_password = ChangePassword(min_password_length=1, rules=None)
 flask_change_password.init_app(myapp_obj)
 
@@ -22,6 +23,6 @@ db = SQLAlchemy(myapp_obj)
 login = LoginManager(myapp_obj)
 login.login_view = 'login'
 
-migrate = Migrate(myapp_obj, db)
+migrate = Migrate(myapp_obj, db, render_as_batch=True)
 
 from app import routes, models

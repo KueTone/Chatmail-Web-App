@@ -10,7 +10,7 @@ from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
-from .models import User, Post
+from .models import User, Post, Checklist
 # unique user id for profile image
 from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
@@ -180,3 +180,23 @@ def compose_email():
         flash('Email sent!')
         return redirect(url_for('index'))
     return render_template('sendingEmail.html', title='Compose', form=form)
+
+@myapp_obj.route('/checklist', methods=['POST','GET'])
+def checklist():
+    incomplete = Checklist.query.filter_by(complete=False).all()
+    complete = Checklist.query.filter_by(complete=True).all()
+    return render_template('checklist.html', incomplete=incomplete, complete=complete)
+
+@myapp_obj.route('/add', methods=['POST'])
+def add():
+    checklist = Checklist(text=request.form['checklistitem'], complete=False)
+    db.session.add(checklist)
+    db.session.commit() 
+    return redirect(url_for('checklist'))
+
+@myapp_obj.route('/complete/<id>')
+def complete(id):
+    checklist = Checklist.query.filter_by(id=int(id)).first()
+    checklist.complete = True
+    db.session.commit()  
+    return redirect(url_for('checklist'))

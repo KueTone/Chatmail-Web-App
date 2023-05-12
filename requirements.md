@@ -9,7 +9,7 @@
 7. Delete Account (dorian)
 8. Block User
 9. Create account
-10. Unsend Email (ryan)
+10. Logout account (ryan)
 11. Search Messages
 12. Change Password
 

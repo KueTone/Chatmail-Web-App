@@ -50,6 +50,5 @@
     </p>
 
     {% endif %}
-    <p>{{ form.submit }}</p>
-  </form>
+    <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='bio') }}">{{ form.submit }}</a>
 {% endblock %}

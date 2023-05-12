@@ -152,6 +152,7 @@ def deletePost(id):
     return redirect(url_for('index'))    
 
 @myapp_obj.route("/github/<string:username>/")
+login_required
 def connectGithub(username):
     # Github authentication
     token = "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"
@@ -184,6 +185,7 @@ def connectGithub(username):
     return redirect(url_for('profile', username=username))
 
 @myapp_obj.route('/compose_email', methods=['GET', 'POST'])
+@login_required
 def compose_email():
     form = ComposeEmailForm()
     if form.validate_on_submit():
@@ -200,3 +202,27 @@ def compose_email():
         flash('Email sent!')
         return redirect(url_for('index'))
     return render_template('sendingEmail.html', title='Compose', form=form)
+
+@myapp_obj.route('/editPost/<id>/', methods=['GET', 'POST'])
+@login_required
+def editPost(id):
+    form = ComposeEmailForm()
+    postEdit = Post.query.get(id)
+    if form.validate_on_submit():
+        user = User.query.filter_by(username = form.recipient.data).first()
+        if user is None:
+            flash('Invalid username: {}'.format(form.recipient.data))
+            return redirect(url_for('compose_email'))
+        postEdit.receive_id = user.id
+        postEdit.body = form.body.data
+        db.session.add(postEdit)
+    
+        db.session.commit()
+        flash("Post Edited")
+        return redirect(url_for('index')) 
+    elif request.method == 'GET':
+        form.recipient.data = postEdit.receiver.username
+        form.body.data = postEdit.body
+    return render_template('sendingEmail.html', title='Compose', form=form)
+
+    

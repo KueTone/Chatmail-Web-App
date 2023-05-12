@@ -3,7 +3,7 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
-from .forms import LoginForm, EditProfileForm
+from .forms import LoginForm, EditProfileForm, RegistrationForm
 from app import myapp_obj
 from app import db
 from flask_login import current_user
@@ -20,6 +20,7 @@ import os
 #github api
 import requests
 import json
+from github import Github
 
 @myapp_obj.route('/')
 @myapp_obj.route('/index')
@@ -60,10 +61,8 @@ def edit_profile(section):
             current_user.set_password(form.password.data)
         elif section == 'email':
             current_user.email      = form.email.data
-        elif section == 'first':
-            current_user.first      = form.first.data
-        elif section == 'last':
-            current_user.last       = form.last.data
+        elif section == 'name':
+            current_user.name      = form.name.data
         elif section == 'bio':
             current_user.bio        = form.bio.data
         elif section =='profilePic':
@@ -84,8 +83,7 @@ def edit_profile(section):
     elif request.method == 'GET':
         form.username.data          = current_user.username
         form.email.data             = current_user.email
-        form.first.data             = current_user.first
-        form.last.data              = current_user.last
+        form.name.data             = current_user.name
         form.bio.data               = current_user.bio
     return render_template('editProfile.html', title='Edit Profile', form=form, section=section)
 
@@ -117,11 +115,8 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data)
         user.set_password(form.password.data)
-        user.email = 0
-        user.first = form.first.data
-        user.last = form.last.data
-        user.age = 0
-        user.bio = 0
+        user.name = form.name.data
+
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
@@ -147,20 +142,37 @@ def delete_user():
     return redirect(url_for('index'))
     
 
-@myapp_obj.route("/github/<string:username>/", methods=['GET', 'POST'])
+@myapp_obj.route("/github/<string:username>/")
 def connectGithub(username):
-    # github username
-    user = username
-    # url to request
-    url = f"https://api.github.com/users/{user}"
-    # make the request and return the json
-    user_data = requests.get(url).json()
-    
-    # if request.method == 'POST':
-    #     elif request.method == 'GET':
-        
-    return user_data
+    # Github authentication
+    token = "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"
 
+    gh_session = requests.Session()
+    gh_session.auth = (username , token)
+    user = Github().get_user(username)
+
+    repos = ''
+    
+    for repo in user.get_repos():
+        repos += "#" + repo.full_name
+
+        flash(repos)
+
+    current_user.name           = user.name
+    current_user.bio            = user.bio
+    current_user.followers      = user.followers
+    current_user.following      = user.following
+    current_user.repositories   = user.public_repos
+    current_user.repositories_name   = repos
+    db.session.commit()
+
+
+
+
+    # user_data = requests.get(url).json()
+    # flash(json.dumps(user_data))
+    
+    return redirect(url_for('profile', username=username))
 
 @myapp_obj.route("/compose_email", methods=['GET', 'POST'])
 def compose_email():

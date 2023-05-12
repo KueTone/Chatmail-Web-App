@@ -4,8 +4,8 @@ myapp_obj.app_context().push()
 
 johnathon = User(username = 'kuetone',
                 email='sammyshark@example.com',
-                first='Johnathon',
-                last='Lu',
+                name='Johnathon',
+
                 age = 20,
                 bio='Marine biology student')
 johnathon.set_password('password')
@@ -13,8 +13,8 @@ db.session.add(johnathon)
 
 alicia = User(username = 'al',
                 email='alicia@hotmail.com',
-                first='alicia',
-                last='arnold',
+                name='alicia',
+
                 age = 19,
                 bio='aviation')
 alicia.set_password('word')
@@ -22,8 +22,8 @@ db.session.add(alicia)
 
 u = User(username = 'ExampleUser',
          email = 'user@example.com', 
-         first = 'Who-ser', 
-         last = 'User', 
+         name = 'Who-ser', 
+
          age = 10, 
          bio = "This is an example of a user's profile and information")
 u.set_password('pass')
@@ -31,8 +31,8 @@ db.session.add(u)
 
 u2 = User(username = 'DeleteUserEx',
          email = 'user@example.com', 
-         first = 'us', 
-         last = 'er', 
+         name = 'user', 
+
          age = 10, 
          bio = "Delete this user")
 u2.set_password('delete')

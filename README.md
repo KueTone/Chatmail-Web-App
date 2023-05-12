@@ -26,9 +26,11 @@ For Mac devices
     3. Pip install flask_wtf
     4. pip install flask_migrate
     5. Pip install flask_change_password
-    6. 
+    
+    6. pip install beautifulsoup4
+    7. pip install requests
 4. Generate a url
-    1. Python3 run.py
+    1. Python run.py
 
 ## License
 

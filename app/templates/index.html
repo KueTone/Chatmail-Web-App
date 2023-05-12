@@ -12,11 +12,18 @@
     {% for post in posts %}
   
     <div class="post">
-      
       {% if post.author.profilePic != None %}
-      <p><img src = "{{ url_for('static', filename = 'images/' + post.author.profilePic) }}" width = "50"> <b>{{ post.author.username }}</b> {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} to <b>{{ post.receiver.username }}</b></p>
+      <p><img src = "{{ url_for('static', filename = 'images/' + post.author.profilePic) }}" width = "50"> 
+        <b>{{ post.author.username }}</b> 
+        {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} to 
+        <b>{{ post.receiver.username }}</b>
+      </p>
       {% else %}
-      <p><img src = "{{ url_for('static', filename = 'images/default.png') }}" width = "50"> <b>{{ post.author.username }}</b> {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} to <b>{{ post.receiver.username }}</b></p>
+      <p><img src = "{{ url_for('static', filename = 'images/default.png') }}" width = "50"> 
+        <b>{{ post.author.username }}</b> 
+        {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} to 
+        <b>{{ post.receiver.username }}</b>
+      </p>
       {% endif %}
       <p>{{ post.body }}</p>
     </div>
@@ -32,6 +39,7 @@
               {% for user in users %}
 
               <br class="post">
+              
                 {% if user.profilePic != None %}
                   <p><img src = "{{ url_for('static', filename = 'images/' + user.profilePic) }}" width = "50"> <a href="#"><b>{{ user.username }}</b></a> </p>
                 {% else %}

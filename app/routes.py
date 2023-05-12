@@ -11,10 +11,15 @@ from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
 from .models import User, Post
+# unique user id for profile image
 from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
 import uuid as uuid
+#saving image
 import os
+#github api
+import requests
+import json
 
 @myapp_obj.route('/')
 @myapp_obj.route('/index')
@@ -107,18 +112,36 @@ def login():
 @myapp_obj.route('/logout')
 def logout():
     logout_user()
-    flash('You are being logged out...')
+    flash('Sorry to see you go! Logging out...')
     return redirect(url_for('index'))
 
-@myapp_obj.route('/delete/<id>/')
-def delete_user(id):
-    
+@myapp_obj.route('/delete/', methods=['GET', 'POST'])
+@login_required
+def delete_user():
+    userDelete = User.query.get_or_404(current_user.id)
+    postDelete = Post.query.filter(Post.receive_id == current_user.id).delete()
+    postDelete2 = Post.query.filter(Post.author_id == current_user.id).delete()
+    db.session.delete(userDelete)
+    db.session.commit()
+    flash("Sorry to see you go! Deleting User & all Posts by and to User...")
     return redirect(url_for('index'))
     
 
-@myapp_obj.route("/members/<string:name>/")
-def getMember(name):
-    return escape(name)
+@myapp_obj.route("/github/<string:username>/", methods=['GET', 'POST'])
+def connectGithub(username):
+    # github username
+    user = username
+    # url to request
+    url = f"https://api.github.com/users/{user}"
+    # make the request and return the json
+    user_data = requests.get(url).json()
+    
+    # if request.method == 'POST':
+    #     elif request.method == 'GET':
+        
+    return user_data
+
+
 @myapp_obj.route("/compose_email", methods=['GET', 'POST'])
 def compose_email():
         return render_template('sendEmail.html')

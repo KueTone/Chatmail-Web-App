@@ -55,4 +55,11 @@ db.session.add(email4)
 email5 = Post(body = 'Why am I here??!??', author_id=2, receive_id=1)
 db.session.add(email5)
 
+email6 = Post(body = 'This post is an example of receiving from a users deleted account', author_id=4, receive_id=1)
+db.session.add(email6)
+
+email7 = Post(body = 'This post is an example of sending to a users deleted account', author_id=1, receive_id=4)
+db.session.add(email7)
+
+
 db.session.commit()

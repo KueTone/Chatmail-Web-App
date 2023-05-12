@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
-    
+        
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
@@ -44,8 +44,8 @@ class Post(db.Model):
     body = db.Column(db.String(256))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     
-    receive_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)    
+    receive_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
     def __repr__(self):
         return f'<Post {self.id}: {self.body}>'

@@ -161,20 +161,18 @@ def connectGithub(username):
         
     return user_data
 
-
 @myapp_obj.route('/compose_email', methods=['GET', 'POST'])
 def compose_email():
-    form = ComposingEmailForm()
+    form = ComposeEmailForm()
     if form.validate_on_submit():
-        recipient = form.recipient.data
-        user = User.query.filter_by(username=recipient).first_or_404()
+        user = User.query.filter_by(username = form.recipient.data).first_or_404()
 
 #        recipient = User.query.filter_by(user=form.recipient.data).first_or_404()
 #        if recipient is None:
 #            flash('Invalid recipient email')
 #            return redirect(url_for('compose_email'))
 #       post = Post(author=current_user, recipient=recipient, subject=form.subject.data, body=form.body.data)
-        post = Post(author = current_user, receiver = user, body = form.body.data)
+        post = Post(author = current_user.username, receiver = user, body = form.body.data)
         db.session.add(post)
         db.session.commit()
         flash('Email sent!')

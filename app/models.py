@@ -49,6 +49,11 @@ class Post(db.Model):
 
     def __repr__(self):
         return f'<Post {self.id}: {self.body}>'
+    
+class BlockList(db.Model):
+    user = db.Column(db.String(32))
+    def __repr__(self):
+        return f'<Post {self.user}>'
 
 
 @login.user_loader

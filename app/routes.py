@@ -183,7 +183,8 @@ def connectGithub(username):
     current_user.repositories_name   = repos
     db.session.commit()
     
-    @myapp_obj.route('/block', methods=['GET', 'POST'])
+@myapp_obj.route('/block', methods=['GET', 'POST'])
+@login_required
 def block():
     form = BlockListForm()
     if form.validate_on_submit():

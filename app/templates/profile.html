@@ -1,38 +1,92 @@
-<html>
-  <head>
-    <title>User Profile Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen" />
-  </head>
-  <body>
-    <div class="header">
-      <nav>
-        <ul id="logout">
-          <li role="presentation" class="active">
-            <a href="/welcome">Logout</a>
-          </li>
-        </ul>
-        <ul id="editProfile">
-          <li role="presentation" class="active">
-            <a href="/editProfile">Edit Profile</a>
-          </li>
-        </ul>
-      </nav>
+{% extends "base.html" %}
+
+{% block content %}
+
+<head>
+  <title>User Profile Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <div class = "container d-flex justify-content-center">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark" style="width: 750px;" >
+      <div class ="row">
+      
+
+        <div class ="col-7">
+          <h3>{{ user.first }}'s Dashboard </h3>
+          <p class="card-text" style="width: 90%; word-wrap:break-word">
+            
+            <strong>Username: </strong>{{ user.username }}
+            {% if user == current_user %}
+            <a href="{{ url_for('edit_profile', section='username') }}">Edit</a>
+  
+            <br>
+            <strong>Profile Pic:</strong> {{ user.profilePic }}
+            
+            <br>
+            <strong>Email:</strong> {{ user.email}} 
+  
+            <a href="{{ url_for('edit_profile', section='email') }}">Edit</a>
+  
+            <br>
+            <strong>Password:</strong> ******
+  
+            <a href="{{ url_for('edit_profile', section='password') }}">Edit</a>
+  
+            <br>
+            <strong>First Name:</strong> {{ user.first }} 
+  
+            <a href="{{ url_for('edit_profile', section='first') }}">Edit</a>
+  
+            <br>
+            <strong>Last Name:</strong> {{ user.last }} 
+  
+            <a href="{{ url_for('edit_profile', section='last') }}">Edit</a>
+  
+            <br>
+            <strong>Age:</strong> {{ user.age }} 
+  
+            <a href="{{ url_for('edit_profile', section='age') }}">Edit</a>
+  
+            <br>
+            <strong>About me:</strong> {{ user.bio }} 
+  
+            <a href="{{ url_for('edit_profile', section='bio') }}">Edit</a>
+  
+            <br>
+
+            <a href="{{ url_for('delete_user', id=current_user)}}"> DELETE USER</a>
+            {% endif %}
+          </p>
+          
+        </div>
+        <div class = "col-5">
+          {% if user.profilePic == None %}
+
+          <img src = "{{ url_for('static', filename='images/default.png') }}" width="225" align="center">
+          
+          {% else %}
+          
+          <img src = "{{ url_for('static', filename='images/' + user.profilePic) }}" width="225" align="center">
+
+          {% endif %}
+          {% if user == current_user %}
+          
+          <br>
+          <a href="{{ url_for('edit_profile', section='profilePic')}}">Edit</a>
+
+          {% endif %}
+          </div>
     </div>
-    <div class="container">
-      <h1>User Profile</h1>
-      <br />
-
-      <p>
-
-        Name: {{ username }}<br />
-        Email: {{email}} <br />
-        Password: {{password}} <br />
-      </p>
-
-
-      {% if error %}
-      <p class="error"><strong>Error:</strong> {{ error }} {% endif %}</p>
     </div>
-  </body>
-</html>
+    </div>
+
+      
+
+      
+    
+  </div>
+
+
+</body>
+{% endblock %}

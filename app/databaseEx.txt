@@ -1,0 +1,53 @@
+# enter python virtual machine
+#$ python3
+
+# import myapp_obj and database from app module
+#>> from app import myapp_obj, db
+# import database structure User and Post from models.py
+#>> from app.models import User, Post
+# to speed up using flask functions w/o myapp_obj for every line
+#>> myapp_obj.app_context().push()
+
+# to add users or posts 
+#>> db.session.add(<user/post variable>)
+# to commit changes
+#>> db.session.commit()
+
+# to see all Users/Posts
+#>> User/Post.query.all() or .get(<#>)
+# to delete users or posts
+#>> db.session.delete(post)
+
+# for all passwords, use user.set_password('<password>') in order to set it as a hash since setting the literals won't be the same
+johnathon = User(username = 'kuetone',
+                password = 'password',
+                email='sammyshark@example.com',
+                first='Johnathon',
+                last='Lu',
+                age = 20,
+                bio='Marine biology student')
+
+alicia = User(username = 'al',
+                password = 'word',
+                email='alicia@hotmail.com',
+                first='alicia',
+                last='arnold',
+                age = 19,
+                bio='aviation')
+
+u = User(username = 'ExampleUser', password = 'pass', email = 'user@example.com', first = 'us', last = 'er', age = 10, bio = 'This is an example of a user's profile and information')
+# use:
+# u = User.query.get(2)
+# author = u
+email1 = Post(body = 'asdfjk l;qwe ruiopzx cvnm,.',
+              user_id = 1)
+
+email2 = Post(body = 'What are you here to?',
+              user_id = 1)
+
+email3 = Post(body = 'Big word register babes.', user_id = 2)
+
+email4 = Post(body = 'What have you done??!??',
+              author = johnathon)
+
+email5 = Post(body = 'Why am I here??!??', receive=1, user_id=2)

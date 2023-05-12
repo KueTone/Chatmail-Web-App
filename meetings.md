@@ -2,7 +2,7 @@
 
 ## Meetings
 
-### 2020-04-20 at 24:00 (Template)
+### 2023-04-20 at 24:00 (Template)
 
 - Team Members Attended
   - Johnathon
@@ -36,7 +36,7 @@
 - Group Progress Summary
   - Setup and assigned the requirements. gave eachother a way to contact one another. Phillip wasn't here unofortunately so wasn't able to get his handle and he doesn't know what requirements he's doing. All of us will work on the functional requirement use cases.
 
-### 2020-04-28 at 12:30
+### 2023-04-28 at 12:30
 
 - Team Members Attended (class)
   - Johnathon
@@ -63,5 +63,14 @@
   - (Dorian) What I did: created the createAcct method in routes.py and created the create account html page. What I will do: integrate the database functionality to make createAcct functional as well as creating the option to delete the account on the profile page.
   - (Ryan)
 
+### 2023-05-06 at 12:30
 
+- Team Members Attended
+  - Johnathon
+  - Phillip
+  - Dorian
+- Team Update
+  - (Johnathon) worked on SQL database and getting that up and running successfully so teammates could use the database. Will continue working on that and adding more values to the database for edit profile and user information.
+  - (Phillip) Worked on developing class for composing emails in forms.py and editing class Post in models.py file. Will work on fully implementing image file attachments to Post and checklist creation
+  - (Dorian) Worked on the the “createaccount”function’s database syntax in routes.py. Will work on the account deletion requirement
 

@@ -2,6 +2,21 @@
 
 Chatmail is a python email client with an integrated chat as well as a todo checklist.
 
+## Requirements
+
+1. **Connect with any external API** (johnathon)
+2. Edit User Profiles (johnathon)
+3. Login account (johnathon)
+4. Delete chat messages (johnathon)
+5. Send chat messages (phillip)
+6. Create items for checklist (johnathon)
+7. Delete Account (johnathon)
+8. Block User (dorian)
+9. Create account (dorian)
+10. **Advance search items with regular expressions or filters by categories** (ryan)
+11. Search Chat Messages (ryan)
+12. Change Password (johnathon)
+
 ## Contributors
 
 - Johnathon Lu (@KueTone) Team Lead

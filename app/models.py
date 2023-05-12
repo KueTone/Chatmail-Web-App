@@ -11,6 +11,7 @@ from sqlalchemy.orm import relationship
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime(), default=datetime.now)
     username = db.Column(db.String(32), nullable=False)
     password = db.Column(db.String(32), nullable=False)
     email = db.Column(db.String(100), nullable=True)
@@ -46,7 +47,7 @@ class User(db.Model, UserMixin):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(256))
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime(), default=datetime.now)
     
     receive_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -63,6 +64,7 @@ class BlockList(db.Model):
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime(), default=datetime.now)
     text = db.Column(db.String(), nullable=False) 
     complete = db.Column(db.Boolean)
     

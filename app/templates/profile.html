@@ -18,7 +18,7 @@
             
             <strong>Username: </strong>{{ user.username }}
             {% if user == current_user %}
-            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='username') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" style= "height: 15px; padding-bottom: 20px; padding-top: 0px;" href="{{ url_for('edit_profile', section='username') }}">Edit</a>
   
             <br>
             <strong>Profile Pic:</strong> {{ user.profilePic }}
@@ -26,27 +26,27 @@
             <br>
             <strong>Email:</strong> {{ user.email}} 
   
-            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='email') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" style= "height: 15px; padding-bottom: 20px; padding-top: 0px;" href="{{ url_for('edit_profile', section='email') }}">Edit</a>
   
             <br>
             <strong>Password:</strong> ******
   
-            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='password') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" style= "height: 15px; padding-bottom: 20px; padding-top: 0px;" href="{{ url_for('edit_profile', section='password') }}">Edit</a>
   
             <br>
             <strong>Name:</strong> {{ user.name }} 
   
-            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='name') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" style= "height: 15px; padding-bottom: 20px; padding-top: 0px;" href="{{ url_for('edit_profile', section='name') }}">Edit</a>
   
             <br>
             <strong>Age:</strong> {{ user.age }} 
   
-            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='age') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" style= "height: 15px; padding-bottom: 20px; padding-top: 0px;" href="{{ url_for('edit_profile', section='age') }}">Edit</a>
   
             <br>
             <strong>About me:</strong> <br> {{ user.bio }} 
   
-            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='bio') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" style= "height: 15px; padding-bottom: 20px; padding-top: 0px;" href="{{ url_for('edit_profile', section='bio') }}">Edit</a>
 
             <br>
             <strong>Number of Repositories:</strong>  {{ user.repositories}} 
@@ -56,10 +56,6 @@
 
             <br>
             <strong>Following:</strong> {{ user.following }} 
-
-            <br>
-
-            <strong>Date Created: </strong> {{ user.timestamp.strftime("%B %d, %Y") }}
 
             <br>
             <strong> Repository Names:</strong> 
@@ -74,7 +70,6 @@
               None
             {% endif %}
 
-            <br>
             <br>
 
             <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('edit_profile', section = 'github')}}"> Connect to Github</a>
@@ -100,7 +95,7 @@
           {% if user == current_user %}
           
           <br>
-          <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='profilePic')}}">Edit</a>
+          <a class="btn btn-sm btn-outline-light" style= "height: 15px; padding-bottom: 20px; padding-top: 0px;" href="{{ url_for('edit_profile', section='profilePic')}}">Edit</a>
 
           {% endif %}
           </div>

@@ -115,30 +115,6 @@
   2. Then an error prompt will pop up to let the user know that the message was unable to send
 
 
-### **Use Case: Filter Unwanted Messages**
-
-
-- **Pre-condition:** The User is signed in to their account.
-
-- **Trigger:** The User selects the option to filter incoming messages.
-
-- **Primary Sequence:**
-
-  1. The user is prompted to enter a word or phrase or another user's username that will be filtered for in incoming messages.
-  2. The system will search all future messages sent to the user to determine if they contain the set word or phrase or were sent by the chosen user.
-  3. The system will show these messages in a seperate inbox titled spam.
-
-
-- **Primary Postconditions:** 
-  
-  1. The user will not see any of the filtered messages in their main inbox.
-  2. The user is able to view all filtered messages in their spam inbox.
-
-
-- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
-
-  1. if the input username does not match an existing user, the system will show an error and ask the user for a valid username.
-
 ### **Use Case: Create Account**
 
 - **Pre-condition:** The User has a valid username and password
@@ -162,34 +138,6 @@
   1. If there is an issue with either the username or password provided, the system will show an error
   2. If there is another user with the same username, the system will ask if they are an already existing user.
 
-### **Use Case: Attaching Images to Emails/Chat**
-
-- **Pre-condition:**
-
-  - User has an account and is logged in
-
-- **Trigger:**
-
-  - User has selected the option to “Compose” an email or to “Chat”
-
-- **Primary Sequence:**
-
-  1. The user opens the option to compose an email or chat with user(s)
-  2. User selects the attach image option
-  3. System prompts user to copy paste the image’s URL in a text box or to insert a file of the image
-  4. If the user selects the file insertion option, the system will open the user’s file explorer for them to select a file of the image
-  5. System checks if the URL or file is valid
-  6. System uploads the image in the email or chat if the URL or file is valid
-
-- **Primary Post-conditions:**
-
-  - User can delete the image or file or upload the image through email or chat
-
-- **Alternate Sequence:**
-
-  1. If the URL does not generate an image, the system will display an error message regarding the validation of the URL
-  2. If the file is not the correct type (JPEG, JPG, PNG), the system will display an error message regarding the file type
-  3. If the size of the file is too large, the system will display an error message regarding the size of the file and the maximum capacity
 
 ### **Use Case: Sending Email**
 

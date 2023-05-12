@@ -74,6 +74,9 @@ def edit_profile(section):
             current_user.profilePic = picName
             saver.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], picName))
         elif section =='github':
+            if current_user.username != form.github.data:
+                flash("Not matching usernames. Please try again...")
+                return redirect(url_for('edit_profile', title='Edit Profile', form=form, section = 'github'))
             return redirect(url_for('connectGithub', username = form.github.data))
             
         db.session.commit()
@@ -154,12 +157,16 @@ def deletePost(id):
 @myapp_obj.route("/github/<string:username>/")
 @login_required
 def connectGithub(username):
+    
     # Github authentication
     token = "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"
 
-    gh_session = requests.Session()
-    gh_session.auth = (username , token)
+    # gh_session = requests.Session()
+    # gh_session.auth = (username , token)
     user = Github().get_user(username)
+
+    url = f"https://api.github.com/users/{username}"
+
 
     repos = ''
     

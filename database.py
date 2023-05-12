@@ -22,12 +22,21 @@ db.session.add(alicia)
 
 u = User(username = 'ExampleUser',
          email = 'user@example.com', 
-         first = 'us', 
-         last = 'er', 
+         first = 'Who-ser', 
+         last = 'User', 
          age = 10, 
          bio = "This is an example of a user's profile and information")
 u.set_password('pass')
 db.session.add(u)
+
+u2 = User(username = 'DeleteUserEx',
+         email = 'user@example.com', 
+         first = 'us', 
+         last = 'er', 
+         age = 10, 
+         bio = "Delete this user")
+u2.set_password('delete')
+db.session.add(u2)
 
 email1 = Post(body = 'asdfjk l;qwe ruiopzx cvnm,.',
               author_id = 1, receive_id = 2)

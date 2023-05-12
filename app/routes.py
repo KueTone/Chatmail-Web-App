@@ -183,7 +183,7 @@ def connectGithub(username):
     current_user.repositories_name   = repos
     db.session.commit()
     
-    @myapp_obj.route('/block', methods=['GET', 'POST'])
+@myapp_obj.route('/block', methods=['GET', 'POST'])
 def block():
     form = BlockListForm()
     if form.validate_on_submit():
@@ -292,3 +292,12 @@ def deleteTask(id):
     db.session.commit()
     
     return redirect(url_for('checklist'))
+
+@myapp_obj.route('/search')
+@login_required
+def search():
+    users = User.query.all()
+    search = request.args.get('q')
+    search1 = "%{}%".format(search)
+    posts = Post.query.filter(Post.body.like(search1)).all()
+    return render_template('search.html', users=users, posts=posts)

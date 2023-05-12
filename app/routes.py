@@ -3,14 +3,14 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
-from .forms import LoginForm, EditProfileForm, RegistrationForm, ComposeEmailForm
+from .forms import LoginForm, EditProfileForm, RegistrationForm, ComposeEmailForm, ChecklistForm
 from app import myapp_obj
 from app import db
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
-from .models import User, Post
+from .models import User, Post, Task
 # unique user id for profile image
 from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
@@ -152,7 +152,7 @@ def deletePost(id):
     return redirect(url_for('index'))    
 
 @myapp_obj.route("/github/<string:username>/")
-login_required
+@login_required
 def connectGithub(username):
     # Github authentication
     token = "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"
@@ -226,3 +226,52 @@ def editPost(id):
     return render_template('sendingEmail.html', title='Compose', form=form)
 
     
+@myapp_obj.route('/checklist', methods=['GET', 'POST'])
+@login_required
+def checklist():
+    incomplete = Task.query.filter_by(complete=False).all()
+    complete = Task.query.filter_by(complete=True).all()
+
+    return render_template('checklist.html', incomplete=incomplete, complete=complete)
+
+@myapp_obj.route('/newItem', methods=['GET', 'POST'])
+@login_required
+def createTask():
+    form = ChecklistForm()
+    if form.validate_on_submit():
+       
+        task = Task(text = form.text.data, complete = False)
+
+        db.session.add(task)
+        db.session.commit()
+        flash("Task Added")
+        return redirect(url_for('checklist'))
+    
+    return render_template('newItem.html', form = form)
+
+@myapp_obj.route('/complete/<id>')
+def complete(id):
+
+    todo = Task.query.filter_by(id=int(id)).first()
+    todo.complete = True
+    db.session.commit()
+    
+    return redirect(url_for('checklist'))
+
+@myapp_obj.route('/incomplete/<id>')
+def incomplete(id):
+
+    todo = Task.query.filter_by(id=int(id)).first()
+    todo.complete = False
+    db.session.commit()
+    
+    return redirect(url_for('checklist'))
+
+@myapp_obj.route('/deleteTask/<id>')
+def deleteTask(id):
+
+    todo = Task.query.filter_by(id=int(id)).first()
+    db.session.delete(todo)
+    db.session.commit()
+    
+    return redirect(url_for('checklist'))

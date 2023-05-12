@@ -32,3 +32,7 @@ class RegistrationForm(FlaskForm):
     password2 = PasswordField('Repeat Password', validators=[DataRequired()])
     name = StringField('Name', validators=[DataRequired()])
     submit = SubmitField('Register')
+
+class ChecklistForm(FlaskForm):
+    text = StringField('Text', validators=[DataRequired()])
+    submit = SubmitField('Add Task')

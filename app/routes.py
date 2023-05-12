@@ -3,14 +3,14 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
-from .forms import LoginForm, EditProfileForm, RegistrationForm
+from .forms import LoginForm, EditProfileForm, RegistrationForm, BlockListForm
 from app import myapp_obj
 from app import db
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
-from .models import User, Post
+from .models import User, Post, Block
 from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
 import uuid as uuid

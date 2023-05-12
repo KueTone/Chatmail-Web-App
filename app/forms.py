@@ -24,3 +24,9 @@ class EditProfileForm(FlaskForm):
     age = IntegerField('Age')
     submit = SubmitField('Save Changes')
     profilePic = FileField("Profile Pic")
+    
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Repeat Password', validators=[DataRequired()])
+    submit = SubmitField('Register')

@@ -3,15 +3,16 @@
 1. **Connect with any external API** (johnathon)
 2. Edit User Profiles
 3. Login account
-4. **Add ability to attach images to emails/ chat** (phillip)
-5. Send/unsend email
+4. Delete Posts (phillip)
+5. Send email
 6. Create items for checklist
-7. **Visualize Email Transmissions** (dorian)
+7. Delete Account (dorian)
 8. Block User
 9. Create account
-10. **Advance search items with regular expressions or filters by categories** (ryan)
+10. Unsend Email (ryan)
 11. Search Messages
 12. Change Password
+
 
 ## Non-functional Requirements
 
@@ -77,7 +78,7 @@
 
   1. If Chatmail is unable to save the information due to conflicts such as username conflict, it will display an error message saying "username already taken"
 
-### **Use Case: Login/Logout Account**
+### **Use Case: Login Account**
 
 - **Pre-condition:**
 

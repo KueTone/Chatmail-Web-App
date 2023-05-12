@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
     
 class ComposeEmailForm(FlaskForm):
     recipient_email = StringField('Recipient Email', validators=[DataRequired()])
-    subject = StringField('Subject', validators=[DataRequired()])
+ #   subject = StringField('Subject', validators=[DataRequired()])
     body = StringField('Body', validators=[DataRequired()])
     send = SubmitField('Send')    
 

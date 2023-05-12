@@ -18,19 +18,28 @@ For Mac devices
 2. Make a virtual environment (Venv)
     1. python3 -m venv venv 
     2. Activate venv
-        1. source venv/bin/activate (Mac)
-        2. venv\Scripts\activate (Windows)
+        - For Mac
+    ```
+        source venv/bin/activate
+    ```
+        - For Windows 
+    ``` 
+        venv\Scripts\activate
+    ```
 3. Install necessary flask packages
-    1. Pip install flask_sqlalchemy
-    2. Pip install flask_login
-    3. Pip install flask_wtf
-    4. pip install flask_migrate
-    5. Pip install flask_change_password
-    6. pip install requests
-    7. pip install PyGithub
+```
+pip install flask_sqlalchemy
+pip install flask_login
+pip install flask_wtf
+pip install flask_migrate
+ip install flask_change_password
+pip install requests
+pip install PyGithub
+```
 4. Generate a url
-    1. Python run.py
-
+```
+    Python run.py
+```
 ## License
 
 MIT

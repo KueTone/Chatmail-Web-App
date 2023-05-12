@@ -127,11 +127,12 @@ def register():
 def block():
     form = BlockListForm()
     if form.validate_on_submit():
-        username = form.username.data
-        db.session.add(blocklist)
+        user = form.username.data
+        db.session.add(Block)
         db.session.commit()
         return redirect(url_for('profile'))
-    return render_template('editProfile.html', title='Edit Profile', form=form, section=section)
+    return render_template('blocklist.html', title='BlockList', form=form)
+
 
 
 @myapp_obj.route('/logout')

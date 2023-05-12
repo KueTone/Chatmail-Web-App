@@ -3,28 +3,17 @@
 
 {% block content %}
     <h1>Compose Email</h1>
-    <hr>
 
-    <div class="row">
-        <div class="col-md-8">
-            <form method="POST">
+
+            <form action="" method="post">
                 {{ form.hidden_tag() }}
-                <div class="form-group">
                     {{ form.recipient.label }}
-                    {{ form.recipient(class="form-control") }}
-                    {% for error in form.recipient.errors %}
-                        <span class="text-danger">{{ error }}</span>
-                    {% endfor %}
-                </div>
-                <div class="form-group">
+                    {{ form.recipient(size=32) }}
+
                     {{ form.body.label }}
-                    {{ form.body(class="form-control") }}
-                    {% for error in form.body.errors %}
-                        <span class="text-danger">{{ error }}</span>
-                    {% endfor %}
-                </div>
-                <button type="submit" class="btn btn-primary">{{ form.send.label }}</button>
+                    {{ form.body(size=32) }}
+
+                
+                {{form.send}}
             </form>
-        </div>
-    </div>
 {% endblock %}

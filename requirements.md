@@ -3,14 +3,14 @@
 1. **Connect with any external API** (johnathon)
 2. Edit User Profiles
 3. Login account
-4. Delete Posts (phillip)
-5. Send email
+4. Delete chat messages (phillip)
+5. Send chat messages
 6. Create items for checklist
 7. Delete Account (dorian)
 8. Block User
 9. Create account
-10. Logout account (ryan)
-11. Search Messages
+10. **Advance search items with regular expressions or filters by categories** (ryan)
+11. Search Chat Messages
 12. Change Password
 
 
@@ -114,6 +114,30 @@
   1. If the Message send doesnt go through, an alternate animation will play
   2. Then an error prompt will pop up to let the user know that the message was unable to send
 
+
+### **Use Case: Filter Unwanted Messages**
+
+
+- **Pre-condition:** The User is signed in to their account.
+
+- **Trigger:** The User selects the option to filter incoming messages.
+
+- **Primary Sequence:**
+
+  1. The user is prompted to enter a word or phrase or another user's username that will be filtered for in incoming messages.
+  2. The system will search all future messages sent to the user to determine if they contain the set word or phrase or were sent by the chosen user.
+  3. The system will show these messages in a seperate inbox titled spam.
+
+
+- **Primary Postconditions:** 
+  
+  1. The user will not see any of the filtered messages in their main inbox.
+  2. The user is able to view all filtered messages in their spam inbox.
+
+
+- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+
+  1. if the input username does not match an existing user, the system will show an error and ask the user for a valid username.
 
 ### **Use Case: Create Account**
 

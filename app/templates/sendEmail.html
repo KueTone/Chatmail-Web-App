@@ -1,32 +1,33 @@
-<html>
-  <head>
-    <title>Login page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Login</h1>
-      <br />
-      <form action="" method="post">
-        <input
-          type="text"
-          placeholder="Username"
-          name="username"
-          value="{{
-          request.form.username }}"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value="{{
-          request.form.password }}"
-        />
-        <input class="btn btn-default" type="submit" value="Login" />
-      </form>
-      {% if error %}
-      <p class="error"><strong>Error:</strong> {{ error }} {% endif %}</p>
-    </div>
-  </body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Compose</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.recipient.label }}<br>
+            {{ form.recipient(size=32) }}<br>
+            {% for error in form.recipient.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <!--
+        <p>
+            {{ form.subject.label }}<br>
+            {{ form.subject(size=32) }}<br>
+            {% for error in form.subject.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+    -->
+        <p>
+            {{ form.body.label }}<br>
+            {{ form.body(size=32) }}<br>
+            {% for error in form.body.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>{{ form.send() }}</p>
+    </form>
+{% endblock %}

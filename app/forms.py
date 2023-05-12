@@ -33,6 +33,13 @@ class RegistrationForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     submit = SubmitField('Register')
 
+    
+class BlockListForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    submit = SubmitField('BlockList')
+
+
 class ChecklistForm(FlaskForm):
     text = StringField('Text', validators=[DataRequired()])
     submit = SubmitField('Add Task')
+

@@ -7,6 +7,8 @@ from flask_change_password import ChangePassword, ChangePasswordForm, SetPasswor
 import sys
 from flask_mail import Mail, Message
 
+from flask_mail import Mail, Message
+
 myapp_obj = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))

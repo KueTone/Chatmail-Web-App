@@ -43,6 +43,11 @@
       {{ form.profilePic.label }}<br>
       {{ form.profilePic() }}<br>
     </p>
+    {% elif section == 'github' %}
+    <p>
+      {{ form.github.label }}<br>
+      {{ form.github(size=32) }}<br>
+    </p>
 
     {% endif %}
     <p>{{ form.submit }}</p>

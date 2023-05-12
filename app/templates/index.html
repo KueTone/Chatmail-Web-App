@@ -26,6 +26,9 @@
       </p>
       {% endif %}
       <p>{{ post.body }}</p>
+
+      <a href="{{ url_for('deletePost', id=post.id)}}">Delete Post</a>
+
     </div>
   
     {% endfor %} 

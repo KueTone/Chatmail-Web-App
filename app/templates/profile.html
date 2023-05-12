@@ -59,15 +59,20 @@
 
             <br>
             <strong> Repository Names:</strong> 
-            {% for element in user.repositories_name.split("#") %}
-            
-            {{element}}  <br>
 
-            {% endfor %}
+            {% if user.repositories_name != None %}
+              {% for element in user.repositories_name.split("#") %}
+              
+                {{element}} <br>
+
+              {% endfor %}
+            {% else %}
+              None
+            {% endif %}
 
             <br>
 
-            <a href="{{ url_for('connectGithub', username = current_user.username)}}"> Connect to Github</a>
+            <a href="{{ url_for('edit_profile', section = 'github')}}"> Connect to Github</a>
 
             <br>
             

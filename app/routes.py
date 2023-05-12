@@ -3,7 +3,7 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
-from .forms import LoginForm, EditProfileForm, RegistrationForm
+from .forms import LoginForm, EditProfileForm, RegistrationForm, ComposeEmailForm
 from app import myapp_obj
 from app import db
 from flask_login import current_user
@@ -73,9 +73,9 @@ def edit_profile(section):
             
             current_user.profilePic = picName
             saver.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], picName))
-
+        elif section =='github':
+            return redirect(url_for('connectGithub', username = form.github.data))
             
-
         db.session.commit()
         
         flash('Your changes have been saved.')
@@ -85,6 +85,7 @@ def edit_profile(section):
         form.email.data             = current_user.email
         form.name.data             = current_user.name
         form.bio.data               = current_user.bio
+        form.github.data            = current_user.username
     return render_template('editProfile.html', title='Edit Profile', form=form, section=section)
 
 # @app.route('/welcome', methods=['GET', 'POST'])
@@ -140,7 +141,15 @@ def delete_user():
     db.session.commit()
     flash("Sorry to see you go! Deleting User & all Posts by and to User...")
     return redirect(url_for('index'))
-    
+
+@myapp_obj.route('/deletePost/<id>/', methods=['GET', 'POST'])
+@login_required
+def deletePost(id):
+    postDelete = Post.query.get(id)
+    db.session.delete(postDelete)
+    db.session.commit()
+    flash("Deleting Post")
+    return redirect(url_for('index'))    
 
 @myapp_obj.route("/github/<string:username>/")
 def connectGithub(username):
@@ -156,7 +165,7 @@ def connectGithub(username):
     for repo in user.get_repos():
         repos += "#" + repo.full_name
 
-        flash(repos)
+        # flash(repos)
 
     current_user.name           = user.name
     current_user.bio            = user.bio
@@ -174,6 +183,20 @@ def connectGithub(username):
     
     return redirect(url_for('profile', username=username))
 
-@myapp_obj.route("/compose_email", methods=['GET', 'POST'])
+@myapp_obj.route('/compose_email', methods=['GET', 'POST'])
 def compose_email():
-        return render_template('sendEmail.html')
+    form = ComposeEmailForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username = form.recipient.data).first()
+        if user is None:
+            flash('Invalid username: {}'.format(form.recipient.data))
+            return redirect(url_for('compose_email'))
+        # user = User.query.filter_by(username = form.recipient.data).first_or_404()
+
+    #   post = Post(author=current_user, recipient=recipient, subject=form.subject.data, body=form.body.data)
+        post = Post(body = form.body.data, author_id = current_user.id, receive_id = user.id)
+        db.session.add(post)
+        db.session.commit()
+        flash('Email sent!')
+        return redirect(url_for('index'))
+    return render_template('sendingEmail.html', title='Compose', form=form)

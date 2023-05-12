@@ -10,10 +10,9 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
     
 class ComposeEmailForm(FlaskForm):
-    recipient_email = StringField('Recipient Email', validators=[DataRequired()])
-    subject = StringField('Subject', validators=[DataRequired()])
-    body = StringField('Body', validators=[DataRequired()])
-    send = SubmitField('Send')    
+    recipient = StringField('Username', validators=[DataRequired()])
+    body = StringField('Body', validators=[DataRequired(), Length(min=0, max=140)])
+    send = SubmitField('Send') 
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username')
@@ -25,6 +24,7 @@ class EditProfileForm(FlaskForm):
     age = IntegerField('Age')
     submit = SubmitField('Save Changes')
     profilePic = FileField("Profile Pic")
+    github = StringField("Github Username")
     
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])

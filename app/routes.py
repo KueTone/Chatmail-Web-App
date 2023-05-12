@@ -3,7 +3,7 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
-from .forms import LoginForm, EditProfileForm
+from .forms import LoginForm, EditProfileForm, RegistrationForm
 from app import myapp_obj
 from app import db
 from flask_login import current_user

@@ -183,6 +183,8 @@ def connectGithub(username):
     current_user.repositories_name   = repos
     db.session.commit()
     
+    return redirect(url_for('profile', username = username))
+    
 @myapp_obj.route('/block', methods=['GET', 'POST'])
 @login_required
 def block():

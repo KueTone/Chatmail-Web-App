@@ -61,6 +61,14 @@ class BlockList(db.Model):
         return f'<Post {self.username}>'
 
 
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(), nullable=False) 
+    complete = db.Column(db.Boolean)
+    
+    def __repr__(self):
+        return f'<Task {self.id}: {self.body}>'
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))

@@ -1,50 +1,62 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Edit Profile</h1>
-  <form action="" method="post" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
+<div class="container" id="logincontainer">
+  <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+      <div class="col-md-6 px-0">
 
-    {% if section=='username' %}
-    <p>
-      {{ form.username.label }}<br>
-      {{ form.username(size=32) }}<br>
+        <h3 align="justify">Edit Profile</h3>
+        <form action="" method="post" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
 
-    </p>
-    {% elif section == 'password' %}
-    <p>
-      {{ form.password.label }}<br>
-      {{ form.password(size=32) }}<br>
+          {% if section=='username' %}
+          <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
 
-    </p>
-    {% elif section == 'email' %}
-    <p>
-      {{ form.email.label }}<br>
-      {{ form.email(size=32) }}<br>
-    </p>
-    {% elif section == 'name' %}
-    <p>
-      {{ form.name.label }}<br>
-      {{ form.name(size=32) }}<br>
-    </p>
-    {% elif section == 'age' %}
-    <p>
-      {{ form.age.label }}<br>
-      {{ form.age(size=32) }}<br>
-    </p>
-    {% elif section == 'bio' %}
-    <p>
-      {{ form.bio.label }}<br>
-      {{ form.bio(cols=50, rows=4) }}<br>
+          </p>
+          {% elif section == 'password' %}
+          <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
 
-    </p>
-    {% elif section == 'profilePic' %}
-    <p>
-      {{ form.profilePic.label }}<br>
-      {{ form.profilePic() }}<br>
-    </p>
+          </p>
+          {% elif section == 'email' %}
+          <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}<br>
+          </p>
+          {% elif section == 'name' %}
+          <p>
+            {{ form.name.label }}<br>
+            {{ form.name(size=32) }}<br>
+          </p>
+          {% elif section == 'age' %}
+          <p>
+            {{ form.age.label }}<br>
+            {{ form.age(size=32) }}<br>
+          </p>
+          {% elif section == 'bio' %}
+          <p>
+            {{ form.bio.label }}<br>
+            {{ form.bio(cols=50, rows=4) }}<br>
 
-    {% endif %}
-    <p>{{ form.submit }}</p>
-  </form>
+          </p>
+          {% elif section == 'profilePic' %}
+          <p>
+            {{ form.profilePic.label }}<br>
+            {{ form.profilePic() }}<br>
+          </p>
+          {% elif section == 'github' %}
+          <p>
+            {{ form.github.label }}<br>
+            {{ form.github(size=32) }}<br>
+          </p>
+
+          {% endif %}
+          {{ form.submit }}
+    </form>
+    </div>
+    </div>
+    </div>
 {% endblock %}

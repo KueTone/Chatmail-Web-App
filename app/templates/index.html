@@ -26,6 +26,9 @@
       </p>
       {% endif %}
       <p>{{ post.body }}</p>
+      <a class="btn btn-sm btn-outline-primary" href="{{ url_for('editPost', id=post.id)}}">Edit Post</a>
+      <a class="btn btn-sm btn-outline-danger" href="{{ url_for('deletePost', id=post.id)}}">Delete Post</a>
+
     </div>
   
     {% endfor %} 

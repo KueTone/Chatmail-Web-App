@@ -3,14 +3,14 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
-from .forms import LoginForm, EditProfileForm, RegistrationForm, BlockListForm
+from .forms import LoginForm, EditProfileForm, RegistrationForm, ComposeEmailForm, ChecklistForm, BlockListForm
 from app import myapp_obj
 from app import db
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
-from .models import User, Post, BlockList
+from .models import User, Post, Task, BlockList
 # unique user id for profile image
 from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
@@ -73,9 +73,9 @@ def edit_profile(section):
             
             current_user.profilePic = picName
             saver.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], picName))
-
+        elif section =='github':
+            return redirect(url_for('connectGithub', username = form.github.data))
             
-
         db.session.commit()
         
         flash('Your changes have been saved.')
@@ -85,6 +85,7 @@ def edit_profile(section):
         form.email.data             = current_user.email
         form.name.data             = current_user.name
         form.bio.data               = current_user.bio
+        form.github.data            = current_user.username
     return render_template('editProfile.html', title='Edit Profile', form=form, section=section)
 
 # @app.route('/welcome', methods=['GET', 'POST'])
@@ -140,9 +141,18 @@ def delete_user():
     db.session.commit()
     flash("Sorry to see you go! Deleting User & all Posts by and to User...")
     return redirect(url_for('index'))
-    
+
+@myapp_obj.route('/deletePost/<id>/', methods=['GET', 'POST'])
+@login_required
+def deletePost(id):
+    postDelete = Post.query.get(id)
+    db.session.delete(postDelete)
+    db.session.commit()
+    flash("Deleting Post")
+    return redirect(url_for('index'))    
 
 @myapp_obj.route("/github/<string:username>/")
+@login_required
 def connectGithub(username):
     # Github authentication
     token = "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"
@@ -156,7 +166,7 @@ def connectGithub(username):
     for repo in user.get_repos():
         repos += "#" + repo.full_name
 
-        flash(repos)
+        # flash(repos)
 
     current_user.name           = user.name
     current_user.bio            = user.bio
@@ -184,6 +194,94 @@ def block():
     
     return redirect(url_for('profile', username=username))
 
-@myapp_obj.route("/compose_email", methods=['GET', 'POST'])
+@myapp_obj.route('/compose_email', methods=['GET', 'POST'])
+@login_required
 def compose_email():
-        return render_template('sendEmail.html')
+    form = ComposeEmailForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username = form.recipient.data).first()
+        if user is None:
+            flash('Invalid username: {}'.format(form.recipient.data))
+            return redirect(url_for('compose_email'))
+        # user = User.query.filter_by(username = form.recipient.data).first_or_404()
+
+    #   post = Post(author=current_user, recipient=recipient, subject=form.subject.data, body=form.body.data)
+        post = Post(body = form.body.data, author_id = current_user.id, receive_id = user.id)
+        db.session.add(post)
+        db.session.commit()
+        flash('Email sent!')
+        return redirect(url_for('index'))
+    return render_template('sendingEmail.html', title='Compose', form=form)
+
+@myapp_obj.route('/editPost/<id>/', methods=['GET', 'POST'])
+@login_required
+def editPost(id):
+    form = ComposeEmailForm()
+    postEdit = Post.query.get(id)
+    if form.validate_on_submit():
+        user = User.query.filter_by(username = form.recipient.data).first()
+        if user is None:
+            flash('Invalid username: {}'.format(form.recipient.data))
+            return redirect(url_for('compose_email'))
+        postEdit.receive_id = user.id
+        postEdit.body = form.body.data
+        db.session.add(postEdit)
+    
+        db.session.commit()
+        flash("Post Edited")
+        return redirect(url_for('index')) 
+    elif request.method == 'GET':
+        form.recipient.data = postEdit.receiver.username
+        form.body.data = postEdit.body
+    return render_template('sendingEmail.html', title='Compose', form=form)
+
+    
+@myapp_obj.route('/checklist', methods=['GET', 'POST'])
+@login_required
+def checklist():
+    incomplete = Task.query.filter_by(complete=False).all()
+    complete = Task.query.filter_by(complete=True).all()
+
+    return render_template('checklist.html', incomplete=incomplete, complete=complete)
+
+@myapp_obj.route('/newItem', methods=['GET', 'POST'])
+@login_required
+def createTask():
+    form = ChecklistForm()
+    if form.validate_on_submit():
+       
+        task = Task(text = form.text.data, complete = False)
+
+        db.session.add(task)
+        db.session.commit()
+        flash("Task Added")
+        return redirect(url_for('checklist'))
+    
+    return render_template('newItem.html', form = form)
+
+@myapp_obj.route('/complete/<id>')
+def complete(id):
+
+    todo = Task.query.filter_by(id=int(id)).first()
+    todo.complete = True
+    db.session.commit()
+    
+    return redirect(url_for('checklist'))
+
+@myapp_obj.route('/incomplete/<id>')
+def incomplete(id):
+
+    todo = Task.query.filter_by(id=int(id)).first()
+    todo.complete = False
+    db.session.commit()
+    
+    return redirect(url_for('checklist'))
+
+@myapp_obj.route('/deleteTask/<id>')
+def deleteTask(id):
+
+    todo = Task.query.filter_by(id=int(id)).first()
+    db.session.delete(todo)
+    db.session.commit()
+    
+    return redirect(url_for('checklist'))

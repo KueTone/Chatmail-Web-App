@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h3> CheckList </h3>
+<a class="btn btn-sm btn-outline-primary" href="{{ url_for('createTask') }}">Add Task</a>
+
+          <div>
+                    <h4>Incomplete Items</h4>
+                    <ul>
+                              {% for todo in incomplete %}
+                             {{ todo.text }} <br>
+                             <a class="btn btn-sm btn-outline-success" href="{{ url_for('complete', id=todo.id) }}">Complete</a>
+                             <a class="btn btn-sm btn-outline-danger" href="{{ url_for('deleteTask', id=todo.id) }}">Delete</a> <br>
+                              {% endfor %}    
+                              </ul>
+                    <h4>Completed Items</h4>
+                    <ul>
+                              {% for todo in complete %}
+                              {{ todo.text }} <br>
+                              <a class="btn btn-sm btn-outline-warning" href="{{ url_for('incomplete', id=todo.id) }}">Incomplete</a>
+                              <a class="btn btn-sm btn-outline-danger" href="{{ url_for('deleteTask', id=todo.id) }}">Delete</a> <br>
+                              {% endfor %}
+                    </ul>
+          </div>
+{% endblock %}

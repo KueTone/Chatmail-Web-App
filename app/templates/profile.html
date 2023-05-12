@@ -18,7 +18,7 @@
             
             <strong>Username: </strong>{{ user.username }}
             {% if user == current_user %}
-            <a href="{{ url_for('edit_profile', section='username') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='username') }}">Edit</a>
   
             <br>
             <strong>Profile Pic:</strong> {{ user.profilePic }}
@@ -26,27 +26,27 @@
             <br>
             <strong>Email:</strong> {{ user.email}} 
   
-            <a href="{{ url_for('edit_profile', section='email') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='email') }}">Edit</a>
   
             <br>
             <strong>Password:</strong> ******
   
-            <a href="{{ url_for('edit_profile', section='password') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='password') }}">Edit</a>
   
             <br>
             <strong>Name:</strong> {{ user.name }} 
   
-            <a href="{{ url_for('edit_profile', section='name') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='name') }}">Edit</a>
   
             <br>
             <strong>Age:</strong> {{ user.age }} 
   
-            <a href="{{ url_for('edit_profile', section='age') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='age') }}">Edit</a>
   
             <br>
             <strong>About me:</strong> <br> {{ user.bio }} 
   
-            <a href="{{ url_for('edit_profile', section='bio') }}">Edit</a>
+            <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='bio') }}">Edit</a>
 
             <br>
             <strong>Number of Repositories:</strong>  {{ user.repositories}} 
@@ -59,20 +59,25 @@
 
             <br>
             <strong> Repository Names:</strong> 
-            {% for element in user.repositories_name.split("#") %}
-            
-            {{element}}  <br>
 
-            {% endfor %}
+            {% if user.repositories_name != None %}
+              {% for element in user.repositories_name.split("#") %}
+              
+                {{element}} <br>
+
+              {% endfor %}
+            {% else %}
+              None
+            {% endif %}
 
             <br>
 
-            <a href="{{ url_for('connectGithub', username = current_user.username)}}"> Connect to Github</a>
+            <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('edit_profile', section = 'github')}}"> Connect to Github</a>
 
             <br>
             
             
-            <a href="{{ url_for('delete_user', id=current_user)}}"> DELETE USER</a>
+            <a class="btn btn-sm btn-outline-danger" href="{{ url_for('delete_user', id=current_user)}}"> DELETE USER</a>
             {% endif %}
           </p>
           
@@ -90,7 +95,7 @@
           {% if user == current_user %}
           
           <br>
-          <a href="{{ url_for('edit_profile', section='profilePic')}}">Edit</a>
+          <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='profilePic')}}">Edit</a>
 
           {% endif %}
           </div>

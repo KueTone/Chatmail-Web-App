@@ -5,9 +5,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_change_password import ChangePassword, ChangePasswordForm, SetPasswordForm
 import sys
-from flask_mail import Mail, Message
 
-from flask_mail import Mail, Message
 
 myapp_obj = Flask(__name__)
 

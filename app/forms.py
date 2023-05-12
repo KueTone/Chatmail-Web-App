@@ -8,6 +8,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
+    
 class ComposeEmailForm(FlaskForm):
     recipient_email = StringField('Recipient Email', validators=[DataRequired()])
     subject = StringField('Subject', validators=[DataRequired()])
@@ -29,4 +30,6 @@ class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired()])
+    first = StringField('first', validators=[DataRequired()])
+    last = StringField('last', validators=[DataRequired()])
     submit = SubmitField('Register')

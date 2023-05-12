@@ -3,14 +3,14 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
-from .forms import LoginForm, EditProfileForm, RegistrationForm
+from .forms import LoginForm, EditProfileForm, RegistrationForm, BlockListForm
 from app import myapp_obj
 from app import db
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
-from .models import User, Post
+from .models import User, Post, BlockList
 # unique user id for profile image
 from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
@@ -165,6 +165,16 @@ def connectGithub(username):
     current_user.repositories   = user.public_repos
     current_user.repositories_name   = repos
     db.session.commit()
+    
+    @myapp_obj.route('/block', methods=['GET', 'POST'])
+def block():
+    form = BlockListForm()
+    if form.validate_on_submit():
+        blocked = BlockList(username = form.username.data)
+        db.session.add(blocked)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('blocklist.html', title='BlockList', form=form)
 
 
 

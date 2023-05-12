@@ -123,6 +123,16 @@ def register():
         return redirect(url_for('index'))
     return render_template('register.html', title='Register', form=form)
 
+@myapp_obj.route('/block', methods=['GET', 'POST'])
+def block():
+    form = BlockListForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        db.session.add(blocklist)
+        db.session.commit()
+        return redirect(url_for('profile'))
+    return render_template('editProfile.html', title='Edit Profile', form=form, section=section)
+
 
 @myapp_obj.route('/logout')
 def logout():

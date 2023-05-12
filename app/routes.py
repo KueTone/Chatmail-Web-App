@@ -3,7 +3,7 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
-from .forms import LoginForm, EditProfileForm
+from .forms import LoginForm, EditProfileForm, RegistrationForm, ComposeEmailForm
 from app import myapp_obj
 from app import db
 from flask_login import current_user
@@ -166,12 +166,15 @@ def connectGithub(username):
 def compose_email():
     form = ComposingEmailForm()
     if form.validate_on_submit():
+        recipient = form.recipient.data
+        user = User.query.filter_by(username=recipient).first_or_404()
+
 #        recipient = User.query.filter_by(user=form.recipient.data).first_or_404()
 #        if recipient is None:
 #            flash('Invalid recipient email')
 #            return redirect(url_for('compose_email'))
 #       post = Post(author=current_user, recipient=recipient, subject=form.subject.data, body=form.body.data)
-        post = Post(author = current_user.username, receiver = form.recipient.data, body = form.body.data)
+        post = Post(author = current_user, receiver = user, body = form.body.data)
         db.session.add(post)
         db.session.commit()
         flash('Email sent!')

@@ -21,22 +21,26 @@ import os
 import requests
 import json
 from github import Github
+from datetime import datetime
 
+# Functions as the welcome page and the home page of the user
 @myapp_obj.route('/', methods=['GET', 'POST'])
 @myapp_obj.route('/index', methods=['GET', 'POST'])
 def index():
+    # Takes in information from the tables shown below
     users = User.query.all()
     posts = Post.query.all()
     blocks = BlockList.query.all()
+    
     form = ComposeEmailForm()
+    
+    # Once the user pressses send, the database table Post should update
+    # Once updated, will redirect back to index and display the new posts.
     if form.validate_on_submit():
         user = User.query.filter_by(username = form.recipient.data).first()
         if user is None:
             flash('Invalid username: {}'.format(form.recipient.data))
             return redirect(url_for('index'))
-        # user = User.query.filter_by(username = form.recipient.data).first_or_404()
-
-    #   post = Post(author=current_user, recipient=recipient, subject=form.subject.data, body=form.body.data)
         post = Post(body = form.body.data, author_id = current_user.id, receive_id = user.id)
         db.session.add(post)
         db.session.commit()
@@ -44,7 +48,7 @@ def index():
         return redirect(url_for('index'))
     return render_template('index.html', users=users, posts=posts, title='Compose', form=form, blocks=blocks)
 
-
+# Redirects the user to the profile page and provides user information through filtering by username
 @myapp_obj.route('/profile/<username>/')
 @login_required
 def profile(username):
@@ -52,7 +56,7 @@ def profile(username):
 
     return render_template('profile.html', user = user)
 
-
+# Allows user to edit certain parts of the profile page such as photo, username, password
 @myapp_obj.route('/editProfile/<section>/', methods=['GET', 'POST'])
 @login_required
 def edit_profile(section):
@@ -95,16 +99,14 @@ def edit_profile(section):
         form.github.data            = current_user.username
     return render_template('editProfile.html', title='Edit Profile', form=form, section=section)
 
-# @app.route('/welcome', methods=['GET', 'POST'])
+# Login Page
 @myapp_obj.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
-    if form.validate_on_submit():
-        # flash('Login requested for user: {}, password: {}, remember_me={}'.format(form.username.data, form.password.data, form.remember_me.data))
+    if form.validate_on_submit():        
         user = User.query.filter_by(username=form.username.data).first()
-        # pass = User.query.filter_by(password=form.password.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password: {}'.format(user))
             return redirect(url_for('login'))
@@ -115,6 +117,7 @@ def login():
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
+# Register User
 @myapp_obj.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -131,13 +134,14 @@ def register():
         return redirect(url_for('index'))
     return render_template('register.html', title='Register', form=form)
 
-
+# Logout which redirects the user from anywhere back to index and logs out using logout_user()
 @myapp_obj.route('/logout')
 def logout():
     logout_user()
     flash('Sorry to see you go! Logging out...')
     return redirect(url_for('index'))
 
+# Deletes the user
 @myapp_obj.route('/delete/', methods=['GET', 'POST'])
 @login_required
 def delete_user():
@@ -149,6 +153,7 @@ def delete_user():
     flash("Sorry to see you go! Deleting User & all Posts by and to User...")
     return redirect(url_for('index'))
 
+# Deletes post
 @myapp_obj.route('/deletePost/<id>/', methods=['GET', 'POST'])
 @login_required
 def deletePost(id):
@@ -157,6 +162,9 @@ def deletePost(id):
     db.session.commit()
     flash("Deleting Post")
     return redirect(url_for('index'))    
+
+# Connects to Github API
+# Automatically stores new Github data into profile
 
 @myapp_obj.route("/github/<string:username>/")
 @login_required
@@ -199,14 +207,6 @@ def block():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('blocklist.html', title='BlockList', form=form)
-
-
-
-
-    # user_data = requests.get(url).json()
-    # flash(json.dumps(user_data))
-    
-    return redirect(url_for('profile', username=username))
 
 @myapp_obj.route('/compose_email', methods=['GET', 'POST'])
 @login_required
@@ -263,7 +263,7 @@ def checklist():
 def createTask():
     form = ChecklistForm()
     if form.validate_on_submit():
-       
+        
         task = Task(text = form.text.data, complete = False)
 
         db.session.add(task)

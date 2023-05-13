@@ -1,4 +1,6 @@
+<!-- Extends Base.html file's information allowing us to keep the navigation bar -->
 {% extends "base.html" %}
+
 {% block content %}
 <h3> CheckList </h3>
 <a class="btn btn-sm btn-outline-primary" href="{{ url_for('createTask') }}">Add Task</a>
@@ -7,7 +9,8 @@
                     <h4>Incomplete Items</h4>
                     <ul>
                               {% for todo in incomplete %}
-                             {{ todo.text }} <br>
+                              <b>{{ todo.text }}</b> {{ todo.timestamp.strftime('%Y-%m-%d %H:%M %p') }}
+                              <br>
                              <a class="btn btn-sm btn-outline-success" href="{{ url_for('complete', id=todo.id) }}">Complete</a>
                              <a class="btn btn-sm btn-outline-danger" href="{{ url_for('deleteTask', id=todo.id) }}">Delete</a> <br>
                               {% endfor %}    

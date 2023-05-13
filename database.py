@@ -38,6 +38,15 @@ u2 = User(username = 'DeleteUserEx',
 u2.set_password('delete')
 db.session.add(u2)
 
+u = User(username = 'kenneth0810',
+         email = 'user@example.com', 
+         name = 'Who-ser', 
+
+         age = 10, 
+         bio = "This is an example of a user's profile and information")
+u.set_password('pass')
+db.session.add(u)
+
 email1 = Post(body = 'asdfjk l;qwe ruiopzx cvnm,.',
               author_id = 1, receive_id = 2)
 db.session.add(email1)

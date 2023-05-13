@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
+<!-- If the user is logged in, then display the posts -->
 {% if not current_user.is_anonymous %}
 <main class="container" style="padding-bottom: 100px">
   <a href= "/" type="button" class="btn btn-outline-danger btn-floating btn-lg" id="btn-back-to-top">
@@ -90,7 +91,7 @@
 
   <body>
 
-
+<!-- If the user isn't logged in, display the welcome page which gives a brief overview of what Chatmail is. -->
 <main class="container" style="height: 2000px;">
   <div class="row">
     <div class="col-10">

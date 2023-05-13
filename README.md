@@ -45,13 +45,7 @@ venv\Scripts\activate
 ```
 4. Install necessary flask packages
 ```
-pip install flask_sqlalchemy
-pip install flask_login
-pip install flask_wtf
-pip install flask_migrate
-pip install flask_change_password
-pip install requests
-pip install PyGithub
+pip install -r requirements.txt
 ```
 6. Generate a url
 ```

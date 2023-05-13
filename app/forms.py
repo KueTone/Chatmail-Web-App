@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField
+from datetime import datetime
+from wtforms.fields import DateField, TimeField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField, DateTimeField
 from wtforms.validators import DataRequired, Length
 
 class LoginForm(FlaskForm):
@@ -41,5 +43,7 @@ class BlockListForm(FlaskForm):
 
 class ChecklistForm(FlaskForm):
     text = StringField('Text', validators=[DataRequired()])
+    date = DateField('Date', format='%Y-%m-%d', default=datetime.now().strftime("%Y-%m-%d"))
+    time = TimeField('Time', format='%H:%M', default=datetime.now().strftime("%H:%M"))
     submit = SubmitField('Add Task')
 

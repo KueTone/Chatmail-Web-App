@@ -4,11 +4,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import login
 from hashlib import md5
 from flask_login import UserMixin
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
 
 
-
+# User Table that is generated for each user made when registering
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime(), default=datetime.now)
@@ -43,7 +41,8 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'<user {self.username}: {self.name}>'
 
-
+# Post Table used to store posts with both an author back reference and receiver back reference
+# Auther and Recipient back reference allows for ease of use when filtering
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(256))
@@ -55,17 +54,18 @@ class Post(db.Model):
     def __repr__(self):
         return f'<Post {self.id}: {self.body}>'
     
+# Blocklist contains list of blocked Users that won't be displayed in the main index.html file
 class BlockList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32))
     def __repr__(self):
         return f'<Post {self.username}>'
 
-
+# Task contains all tasks that were made in checklist. Contains timestamp that it was made in.
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime(), default=datetime.now)
-    text = db.Column(db.String(), nullable=False) 
+    text = db.Column(db.String(), nullable=False)
     complete = db.Column(db.Boolean)
     
     def __repr__(self):

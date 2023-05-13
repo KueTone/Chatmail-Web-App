@@ -24,16 +24,35 @@ import requests
 import json
 from github import Github
 
-@myapp_obj.route('/')
-@myapp_obj.route('/index')
+@myapp_obj.route('/', methods=['GET', 'POST'])
+@myapp_obj.route('/index', methods=['GET', 'POST'])
 def index():
     users = User.query.all()
+
     search = request.args.get('q')
     if (search==None):
         search = ""
     search1 = "%{}%".format(search)
     posts = Post.query.filter(Post.body.like(search1)).order_by(desc(Post.id)).all()
-    return render_template('index.html', users=users, posts=posts)
+    
+
+    blocks = BlockList.query.all()
+    form = ComposeEmailForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username = form.recipient.data).first()
+        if user is None:
+            flash('Invalid username: {}'.format(form.recipient.data))
+            return redirect(url_for('index'))
+        # user = User.query.filter_by(username = form.recipient.data).first_or_404()
+
+
+    #   post = Post(author=current_user, recipient=recipient, subject=form.subject.data, body=form.body.data)
+        post = Post(body = form.body.data, author_id = current_user.id, receive_id = user.id)
+        db.session.add(post)
+        db.session.commit()
+        flash('Sending post...')
+        return redirect(url_for('index'))
+    return render_template('index.html', users=users, posts=posts, title='Compose', form=form, blocks=blocks)
 
 @myapp_obj.route('/index/<user>')
 @login_required
@@ -46,19 +65,7 @@ def indexU(user):
     search1 = "%{}%".format(search)
     posts = Post.query.filter(Post.body.like(search1),or_(Post.author_id==current_user.id,Post.author_id==receiveid),or_(Post.receive_id==receiveid,Post.receive_id==current_user.id)).order_by(desc(Post.id)).all()
     return render_template('index.html', users=users, posts=posts)
-
-# @myapp_obj.route('/welcome', methods=['GET', 'POST'])
-# def login():
-#     error = None
-#     if request.method == 'POST':
-#         # future change will incorporate a simple textfile database and maybe a SQL database if provded time
-#         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-#             error = 'Invalid Credentials. Please try again.'
-#         else:
-#             return redirect(url_for('index'))
-#     return render_template('login.html', error=error)
-
-
+  
 @myapp_obj.route('/profile/<username>/')
 @login_required
 def profile(username):
@@ -116,7 +123,7 @@ def login():
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        flash('Login requested for user: {}, password: {}, remember_me={}'.format(form.username.data, form.password.data, form.remember_me.data))
+        # flash('Login requested for user: {}, password: {}, remember_me={}'.format(form.username.data, form.password.data, form.remember_me.data))
         user = User.query.filter_by(username=form.username.data).first()
         # pass = User.query.filter_by(password=form.password.data).first()
         if user is None or not user.check_password(form.password.data):
@@ -201,7 +208,10 @@ def connectGithub(username):
     current_user.repositories_name   = repos
     db.session.commit()
     
+    return redirect(url_for('profile', username = username))
+    
 @myapp_obj.route('/block', methods=['GET', 'POST'])
+@login_required
 def block():
     form = BlockListForm()
     if form.validate_on_submit():
@@ -234,7 +244,7 @@ def compose_email():
         post = Post(body = form.body.data, author_id = current_user.id, receive_id = user.id)
         db.session.add(post)
         db.session.commit()
-        flash('Email sent!')
+        flash('Sending post...')
         return redirect(url_for('index'))
     return render_template('sendingEmail.html', title='Compose', form=form)
 

@@ -2,6 +2,21 @@
 
 Chatmail is a python email client with an integrated chat as well as a todo checklist.
 
+## Requirements
+
+1. **Connect with any external API** (johnathon)
+2. Edit User Profiles (johnathon)
+3. Login account (johnathon)
+4. Delete chat messages (johnathon)
+5. Send chat messages (phillip)
+6. Create items for checklist (johnathon)
+7. Delete Account (johnathon)
+8. Block User (dorian)
+9. Create account (dorian)
+10. **Advance search items with regular expressions or filters by categories** (ryan)
+11. Search Chat Messages (ryan)
+12. Change Password (johnathon)
+
 ## Contributors
 
 - Johnathon Lu (@KueTone) Team Lead
@@ -16,21 +31,32 @@ https://www.when2meet.com/?19639177-KJbMW
 For Mac devices
 1. Install python3
 2. Make a virtual environment (Venv)
-    1. python3 -m venv venv 
-    2. Activate venv
-        1. source venv/bin/activate (Mac)
-        2. venv\Scripts\activate (Windows)
-3. Install necessary flask packages
-    1. Pip install flask_sqlalchemy
-    2. Pip install flask_login
-    3. Pip install flask_wtf
-    4. pip install flask_migrate
-    5. Pip install flask_change_password
-    6. pip install requests
-    7. pip install PyGithub
-4. Generate a url
-    1. Python run.py
-
+```
+python3 -m venv venv 
+```
+3. Activate Virtual Environment
+- For Mac
+```
+source venv/bin/activate
+```
+- For Windows 
+``` 
+venv\Scripts\activate
+```
+4. Install necessary flask packages
+```
+pip install flask_sqlalchemy
+pip install flask_login
+pip install flask_wtf
+pip install flask_migrate
+pip install flask_change_password
+pip install requests
+pip install PyGithub
+```
+6. Generate a url
+```
+python run.py
+```
 ## License
 
 MIT

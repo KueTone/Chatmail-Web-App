@@ -3,53 +3,52 @@
 {% block content %}
 <div class="container" id="logincontainer">
   <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
-      <div class="col-md-6 px-0">
+      <div class="col-md-10 px-0">
 
-        <h3 align="justify">Edit Profile</h3>
         <form action="" method="post" enctype="multipart/form-data">
           {{ form.hidden_tag() }}
 
           {% if section=='username' %}
           <p>
-            {{ form.username.label }}<br>
+            <h3 align="justify">Edit Username</h3><br>
             {{ form.username(size=32) }}<br>
 
           </p>
           {% elif section == 'password' %}
           <p>
-            {{ form.password.label }}<br>
+            <h3 align="justify">Edit Password</h3><br>
             {{ form.password(size=32) }}<br>
 
           </p>
           {% elif section == 'email' %}
           <p>
-            {{ form.email.label }}<br>
+            <h3 align="justify">Edit Email</h3><br>
             {{ form.email(size=32) }}<br>
           </p>
           {% elif section == 'name' %}
           <p>
-            {{ form.name.label }}<br>
+            <h3 align="justify">Edit Name</h3><br>
             {{ form.name(size=32) }}<br>
           </p>
           {% elif section == 'age' %}
           <p>
-            {{ form.age.label }}<br>
+            <h3 align="justify">Edit Age</h3><br>
             {{ form.age(size=32) }}<br>
           </p>
           {% elif section == 'bio' %}
           <p>
-            {{ form.bio.label }}<br>
+            <h3 align="justify">Edit About Me</h3><br>
             {{ form.bio(cols=50, rows=4) }}<br>
 
           </p>
           {% elif section == 'profilePic' %}
           <p>
-            {{ form.profilePic.label }}<br>
+            <h3 align="justify">Edit Profile Photo</h3><br>
             {{ form.profilePic() }}<br>
           </p>
           {% elif section == 'github' %}
           <p>
-            Confirm Username<br>
+            <h3 align="left">Confirm Github Username</h3><br>
             {{ form.github(size=32) }}<br>
           </p>
 

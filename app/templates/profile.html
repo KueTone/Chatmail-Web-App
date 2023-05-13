@@ -49,6 +49,10 @@
             <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='bio') }}">Edit</a>
 
             <br>
+
+            <strong>Date Created: </strong> {{ user.timestamp.strftime("%B %d, %Y") }}
+
+            <br>
             <strong>Number of Repositories:</strong>  {{ user.repositories}} 
 
             <br>
@@ -70,6 +74,7 @@
               None
             {% endif %}
 
+            <br>
             <br>
 
             <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('edit_profile', section = 'github')}}"> Connect to Github</a>

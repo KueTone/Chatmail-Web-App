@@ -1,11 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
 {% if not current_user.is_anonymous %}
-<main class="container">
+<main class="container" style="padding-bottom: 100px">
+  <a href= "/" type="button" class="btn btn-outline-danger btn-floating btn-lg" id="btn-back-to-top">
+    <img src = "{{ url_for('static', filename = 'images/arrow-up-solid.svg') }}" width="30px" height="30px" position="relative"></img></a>
+  </a>
   <div class="row g-5">
     <div class="col-md-8">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
-        <h1>Hello, {{ current_user.first }}!</h1>
+        <h1>Hello, {{ current_user.name }}!</h1>
         <h4> Chat </h4>
       </h3>
   
@@ -37,16 +40,16 @@
       <div class="col-md-4">
         <div class="position-sticky" style="top: 2rem;">
           <div class="p-4 mb-3 bg-body-tertiary rounded">
-            <h4 class="fst-italic">Group Chat</h4>
+            <h4 class="fst-italic">Direct Messages</h4>
 
               {% for user in users %}
 
               <br class="post">
               
                 {% if user.profilePic != None %}
-                  <p><img src = "{{ url_for('static', filename = 'images/' + user.profilePic) }}" width = "50"> <a href="#"><b>{{ user.username }}</b></a> </p>
+                  <p><img src = "{{ url_for('static', filename = 'images/' + user.profilePic) }}" width = "50"> <a class="btn btn-sm btn-outline-dark" href="#"><b>{{ user.username }}</b></a> </p>
                 {% else %}
-                <p><img src = "{{ url_for('static', filename = 'images/default.png') }}" width = "50"> <a href="#"><b>{{ user.username }}</b></a> </p>
+                <p><img src = "{{ url_for('static', filename = 'images/default.png') }}" width = "50"> <a class="btn btn-sm btn-outline-dark" href="#"><b>{{ user.username }}</b></a> </p>
                 {% endif %}
                 {% endfor %} 
           </div>
@@ -54,9 +57,9 @@
           <div class="p-4">
             <h4 class="fst-italic">Elsewhere</h4>
             <ol class="list-unstyled">
-              <li><a href="https://github.com/KueTone/CMPE131-Chatmail">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
+              <li><a class="btn btn-outline-dark " href="https://github.com/KueTone/CMPE131-Chatmail" role="button"><img src = "{{ url_for('static', filename = 'images/github.svg') }}" width="30px" height="20px" position="relative"></img></a>
+              </li>
+
             </ol>
           </div>
         </div>
@@ -64,7 +67,23 @@
     </div>
   </div>
 
-    </main>
+  <footer class="footer">
+    
+    <form action="" method="post">
+      {{ form.hidden_tag() }}
+      <p>
+        {{ form.recipient.label }}
+        {{ form.recipient(size=15) }}
+  
+        {{ form.body.label }}
+        {{ form.body(size=70) }}
+  
+          
+        {{form.send}}
+      </p>
+
+    </form>
+  </footer>
 </main>
   
 {% else%}
@@ -72,7 +91,7 @@
   <body>
 
 
-<main class="container">
+<main class="container" style="height: 2000px;">
   <div class="row">
     <div class="col-10">
       <div class="p-4 p-md-5 mb-4 rounded text-bg-dark" style="width: 1000px;">
@@ -95,30 +114,7 @@
 
       </div>
 
-
-
-
-
-
-
-
-
-
-
-
     </div>
-    
-
-
-
-
-
-
-
-
-
-    
-    
 
     <div class="col-2 px-0">
       <div class="position-sticky" style="top: 2rem;">
@@ -140,13 +136,6 @@
   
 </div>
 </main>
-
-<footer class="blog-footer">
-    <a href="/">Back to top</a>
-</footer>
-
-
-    
   </body>
 
   {% endif %}

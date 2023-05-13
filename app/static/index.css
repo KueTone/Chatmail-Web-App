@@ -1,0 +1,27 @@
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding-left: 20px;
+  padding-top: 20px;
+  width: 100%;
+  min-height: 30px;
+  background-color: #ecf1f1;
+  color: rgb(0, 0, 0);
+  text-align: left;
+  vertical-align: bottom
+}
+
+.footer:before {
+  clear: both;
+  display: block;
+  height: 120px;
+  min-height: 120px;
+}
+
+#btn-back-to-top {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;          
+}

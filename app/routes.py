@@ -14,6 +14,7 @@ from .models import User, Post, Task, BlockList
 # unique user id for profile image
 from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
+# handles file input
 import uuid as uuid
 #saving image
 import os
@@ -98,6 +99,7 @@ def edit_profile(section):
 # @app.route('/welcome', methods=['GET', 'POST'])
 @myapp_obj.route('/login', methods=['GET', 'POST'])
 def login():
+    # If user is already logged in, will redirect to homepage
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
@@ -261,7 +263,7 @@ def createTask():
     if form.validate_on_submit():
        
         task = Task(text = form.text.data, complete = False)
-
+        # Uses Task model and ChecklistForm to handle text information of Task
         db.session.add(task)
         db.session.commit()
         flash("Task Added")

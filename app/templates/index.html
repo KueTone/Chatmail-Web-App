@@ -8,34 +8,42 @@
   <div class="row g-5">
     <div class="col-md-8">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
+
+
         <h1>Hello, {{ current_user.name }}!</h1>
         <h4> Chat </h4>
       </h3>
-  
-    {% for post in posts %}
-  
-    <div class="post">
-      {% if post.author.profilePic != None %}
-      <p><img src = "{{ url_for('static', filename = 'images/' + post.author.profilePic) }}" width = "50"> 
-        <b>{{ post.author.username }}</b> 
-        {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} to 
-        <b>{{ post.receiver.username }}</b>
-      </p>
-      {% else %}
-      <p><img src = "{{ url_for('static', filename = 'images/default.png') }}" width = "50"> 
-        <b>{{ post.author.username }}</b> 
-        {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} to 
-        <b>{{ post.receiver.username }}</b>
-      </p>
-      {% endif %}
-      <p>{{ post.body }}</p>
-      <a class="btn btn-sm btn-outline-primary" href="{{ url_for('editPost', id=post.id)}}">Edit Post</a>
-      <a class="btn btn-sm btn-outline-danger" href="{{ url_for('deletePost', id=post.id)}}">Delete Post</a>
 
+      <form id="form">
+        <input type="search" id="query" name="q" placeholder="Search...">
+        <button>Search</button>
+      </form>
+
+      {% for post in posts %}
+
+      <div class="post">
+        {% if post.author.profilePic != None %}
+        <p><img src="{{ url_for('static', filename = 'images/' + post.author.profilePic) }}" width="50">
+          <b>{{ post.author.username }}</b>
+          {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} to
+          <b>{{ post.receiver.username }}</b>
+        </p>
+        {% else %}
+        <p><img src="{{ url_for('static', filename = 'images/default.png') }}" width="50">
+          <b>{{ post.author.username }}</b>
+          {{post.timestamp.strftime("%B %d, %Y %I:%M %p")}} to
+          <b>{{ post.receiver.username }}</b>
+        </p>
+        {% endif %}
+        <p>{{ post.body }}</p>
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('editPost', id=post.id)}}">Edit Post</a>
+        <a class="btn btn-sm btn-outline-danger" href="{{ url_for('deletePost', id=post.id)}}">Delete Post</a>
+
+      </div>
+
+      {% endfor %}
     </div>
-  
-    {% endfor %} 
-    </div>
+
 
       <div class="col-md-4">
         <div class="position-sticky" style="top: 2rem;">
@@ -47,9 +55,9 @@
               <br class="post">
               
                 {% if user.profilePic != None %}
-                  <p><img src = "{{ url_for('static', filename = 'images/' + user.profilePic) }}" width = "50"> <a class="btn btn-sm btn-outline-dark" href="#"><b>{{ user.username }}</b></a> </p>
+                  <p><img src = "{{ url_for('static', filename = 'images/' + user.profilePic) }}" width = "50"> <a class="btn btn-sm btn-outline-dark" href="/index/{{user.username}}"><b>{{ user.username }}</b></a> </p>
                 {% else %}
-                <p><img src = "{{ url_for('static', filename = 'images/default.png') }}" width = "50"> <a class="btn btn-sm btn-outline-dark" href="#"><b>{{ user.username }}</b></a> </p>
+                <p><img src = "{{ url_for('static', filename = 'images/default.png') }}" width = "50"> <a class="btn btn-sm btn-outline-dark" href="/index/{{user.username}}"><b>{{ user.username }}</b></a> </p>
                 {% endif %}
                 {% endfor %} 
           </div>
@@ -62,10 +70,22 @@
 
             </ol>
           </div>
+
         </div>
-          
+
+        <div class="p-4">
+          <h4 class="fst-italic">Elsewhere</h4>
+          <ol class="list-unstyled">
+            <li><a href="https://github.com/KueTone/CMPE131-Chatmail">GitHub</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ol>
+        </div>
+      </div>
+
     </div>
   </div>
+
 
   <footer class="footer">
     
@@ -84,11 +104,13 @@
 
     </form>
   </footer>
+
 </main>
-  
+</main>
+
 {% else%}
 
-  <body>
+<body>
 
 
 <main class="container" style="height: 2000px;">
@@ -96,47 +118,64 @@
     <div class="col-10">
       <div class="p-4 p-md-5 mb-4 rounded text-bg-dark" style="width: 1000px;">
 
+
           <h1 class="display-4 fst-italic">Welcome to ChatMail</h1>
-          <p class="lead my-3">ChatMail is a versatile web application that combines two essential features, chat and checklists, to help users stay productive and organized. ChatMail is a powerful web application that satisfies several functional and non-functional requirements. With its unique combination of chat and checklist features, ChatMail enables users to stay organized, communicate effectively, and be productive.</p>
-    
-            <div class="collapse" id="myCollapse">
-              <p class="lead my-3">To meet the user's requirements, ChatMail has several functional and non-functional requirements.</p>
-              
-              <p class="lead my-3">Some of the most important functional requirements of ChatMail include the ability to connect with any external API, attach images to emails or chats, visualize email transmissions, and advanced search items with regular expressions or filters by categories. Additionally, users can edit their profiles, log in and create an account, send or unsend emails, create checklist items, search messages, block users, and change their passwords.</p>
-    
-              <p class="lead my-3">As for the non-functional requirements, ChatMail is expected to work optimally on Google Chrome only. Furthermore, the application supports multiple languages to cater to the global audience.</p>
-    
-              <i>This was generated by ChatGPT and edited by a hooman</i>
-            </div>
-            
+          <p class="lead my-3">ChatMail is a versatile web application that combines two essential features, chat and
+            checklists, to help users stay productive and organized. ChatMail is a powerful web application that
+            satisfies several functional and non-functional requirements. With its unique combination of chat and
+            checklist features, ChatMail enables users to stay organized, communicate effectively, and be productive.
+          </p>
+
+          <div class="collapse" id="myCollapse">
+            <p class="lead my-3">To meet the user's requirements, ChatMail has several functional and non-functional
+              requirements.</p>
+
+            <p class="lead my-3">Some of the most important functional requirements of ChatMail include the ability to
+              connect with any external API, attach images to emails or chats, visualize email transmissions, and
+              advanced search items with regular expressions or filters by categories. Additionally, users can edit
+              their profiles, log in and create an account, send or unsend emails, create checklist items, search
+              messages, block users, and change their passwords.</p>
+
+            <p class="lead my-3">As for the non-functional requirements, ChatMail is expected to work optimally on
+              Google Chrome only. Furthermore, the application supports multiple languages to cater to the global
+              audience.</p>
+
+            <i>This was generated by ChatGPT and edited by a hooman</i>
+          </div>
+
           <p class="lead mb-0">
-            <a href="#myCollapse" data-bs-toggle="collapse" class="text-white fw-bold">Read More...</a></p>
+            <a href="#myCollapse" data-bs-toggle="collapse" class="text-white fw-bold">Read More...</a>
+          </p>
 
-      </div>
-
-    </div>
-
-    <div class="col-2 px-0">
-      <div class="position-sticky" style="top: 2rem;">
-        <div class="p" style="width: 200px;">
-          <h4 class="fst-italic">Elsewhere</h4>
-          <ol class="list-unstyled">
-            <li><a href="https://github.com/KueTone/CMPE131-Chatmail">GitHub</a></li>
-
-          </ol>
         </div>
 
     </div>
 
-  
 
 
- 
+
+
+      <div class="col-2 px-0">
+        <div class="position-sticky" style="top: 2rem;">
+          <div class="p" style="width: 200px;">
+            <h4 class="fst-italic">Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="https://github.com/KueTone/CMPE131-Chatmail">GitHub</a></li>
+
+            </ol>
+          </div>
+
+        </div>
+
+
+
+
   </div>
   
 </div>
 </main>
   </body>
 
-  {% endif %}
-  {% endblock %}
+
+{% endif %}
+{% endblock %}

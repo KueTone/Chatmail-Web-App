@@ -8,7 +8,7 @@ from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-
+# Database table for information of Users
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime(), default=datetime.now)
@@ -26,7 +26,8 @@ class User(db.Model, UserMixin):
     repositories = db.Column(db.Integer, nullable=True)
 
     repositories_name = db.Column(db.String(), nullable=True)
-
+    
+    # Post 
     recipient = db.relationship('Post', backref='receiver', lazy='dynamic', foreign_keys='Post.receive_id')
     author = db.relationship('Post', backref='author', lazy='dynamic', foreign_keys='Post.author_id')
 
@@ -43,7 +44,7 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'<user {self.username}: {self.name}>'
 
-
+# Database table for information on a email composition (post)
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(256))
@@ -54,14 +55,15 @@ class Post(db.Model):
 
     def __repr__(self):
         return f'<Post {self.id}: {self.body}>'
-    
+
+# Database table for information on blocked Users
 class BlockList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32))
     def __repr__(self):
         return f'<Post {self.username}>'
 
-
+# Database table for information on list of Tasks
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime(), default=datetime.now)

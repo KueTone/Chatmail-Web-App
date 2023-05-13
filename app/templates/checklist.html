@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+
+<!--
+Generates webpage for Checklist.
+Shows items in checklist that user has completed or not completed yet.
+-->
+
 {% block content %}
 <h3> CheckList </h3>
 <a class="btn btn-sm btn-outline-primary" href="{{ url_for('createTask') }}">Add Task</a>

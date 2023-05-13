@@ -3,6 +3,8 @@ from flask import redirect
 from flask import flash
 from flask import url_for
 from flask import request
+from sqlalchemy import or_
+from sqlalchemy import desc
 from .forms import LoginForm, EditProfileForm, RegistrationForm, ComposeEmailForm, ChecklistForm, BlockListForm
 from app import myapp_obj
 from app import db
@@ -29,7 +31,14 @@ from datetime import datetime
 def index():
     # Takes in information from the tables shown below
     users = User.query.all()
-    posts = Post.query.all()
+
+    search = request.args.get('q')
+    if (search==None):
+        search = ""
+    search1 = "%{}%".format(search)
+    posts = Post.query.filter(Post.body.like(search1)).order_by(desc(Post.id)).all()
+    
+
     blocks = BlockList.query.all()
     
     form = ComposeEmailForm()
@@ -48,7 +57,18 @@ def index():
         return redirect(url_for('index'))
     return render_template('index.html', users=users, posts=posts, title='Compose', form=form, blocks=blocks)
 
-# Redirects the user to the profile page and provides user information through filtering by username
+@myapp_obj.route('/index/<user>')
+@login_required
+def indexU(user):
+    users = User.query.all()
+    receiveid=User.query.filter(User.username==user).first().id
+    search = request.args.get('q')
+    if (search==None):
+        search = ""
+    search1 = "%{}%".format(search)
+    posts = Post.query.filter(Post.body.like(search1),or_(Post.author_id==current_user.id,Post.author_id==receiveid),or_(Post.receive_id==receiveid,Post.receive_id==current_user.id)).order_by(desc(Post.id)).all()
+    return render_template('index.html', users=users, posts=posts)
+  
 @myapp_obj.route('/profile/<username>/')
 @login_required
 def profile(username):
@@ -299,12 +319,3 @@ def deleteTask(id):
     db.session.commit()
     
     return redirect(url_for('checklist'))
-
-@myapp_obj.route('/search')
-@login_required
-def search():
-    users = User.query.all()
-    search = request.args.get('q')
-    search1 = "%{}%".format(search)
-    posts = Post.query.filter(Post.body.like(search1)).all()
-    return render_template('search.html', users=users, posts=posts)

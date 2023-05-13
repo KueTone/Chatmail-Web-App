@@ -200,9 +200,6 @@ def block():
         return redirect(url_for('index'))
     return render_template('blocklist.html', title='BlockList', form=form)
 
-
-
-
     # user_data = requests.get(url).json()
     # flash(json.dumps(user_data))
     
@@ -213,13 +210,12 @@ def block():
 def compose_email():
     form = ComposeEmailForm()
     if form.validate_on_submit():
+        # Checks to see if recipient entered is a registered User
         user = User.query.filter_by(username = form.recipient.data).first()
         if user is None:
             flash('Invalid username: {}'.format(form.recipient.data))
             return redirect(url_for('compose_email'))
-        # user = User.query.filter_by(username = form.recipient.data).first_or_404()
-
-    #   post = Post(author=current_user, recipient=recipient, subject=form.subject.data, body=form.body.data)
+        # Creates Post (or Email Composition) with the logged in user being the sender, and the entered body and recipient user
         post = Post(body = form.body.data, author_id = current_user.id, receive_id = user.id)
         db.session.add(post)
         db.session.commit()

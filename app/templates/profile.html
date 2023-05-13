@@ -49,6 +49,10 @@
             <a class="btn btn-sm btn-outline-light" href="{{ url_for('edit_profile', section='bio') }}">Edit</a>
 
             <br>
+
+            <strong>Date Created: </strong> {{ user.timestamp.strftime("%B %d, %Y") }}
+
+            <br>
             <strong>Number of Repositories:</strong>  {{ user.repositories}} 
 
             <br>
@@ -56,10 +60,6 @@
 
             <br>
             <strong>Following:</strong> {{ user.following }} 
-
-            <br>
-
-            <strong>Date Created: </strong> {{ user.timestamp.strftime("%B %d, %Y") }}
 
             <br>
             <strong> Repository Names:</strong> 

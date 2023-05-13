@@ -17,7 +17,7 @@
 ## Non-functional Requirements
 
 1. Only expected to work on Google Chrome
-2. **Multilingual Support** -- English & Spanish
+2. **UI interactive interface (or using elements from bootstrap)**
 
 ## Use Cases
 

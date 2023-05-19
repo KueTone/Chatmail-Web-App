@@ -57,17 +57,26 @@ def index():
         return redirect(url_for('index'))
     return render_template('index.html', users=users, posts=posts, title='Compose', form=form, blocks=blocks)
 
-@myapp_obj.route('/index/<user>')
+@myapp_obj.route('/index/<user>/', methods=['GET', 'POST'])
 @login_required
 def indexU(user):
     users = User.query.all()
-    receiveid=User.query.filter(User.username==user).first().id
+    receiveid = User.query.filter(User.username == user).first().id
     search = request.args.get('q')
     if (search==None):
         search = ""
     search1 = "%{}%".format(search)
     posts = Post.query.filter(Post.body.like(search1),or_(Post.author_id==current_user.id,Post.author_id==receiveid),or_(Post.receive_id==receiveid,Post.receive_id==current_user.id)).order_by(desc(Post.id)).all()
-    return render_template('index.html', users=users, posts=posts)
+    
+    form = ComposeEmailForm()
+    form.recipient.data = 'user'
+    if form.validate_on_submit():
+        post = Post(body = form.body.data, author_id = current_user.id, receive_id = receiveid)
+        db.session.add(post)
+        db.session.commit()
+        flash('Sending post...')
+        return redirect(url_for('indexU', user=user))
+    return render_template('index.html', users=users, posts=posts, form=form)
   
 @myapp_obj.route('/profile/<username>/')
 @login_required
@@ -114,7 +123,7 @@ def edit_profile(section):
     elif request.method == 'GET':
         form.username.data          = current_user.username
         form.email.data             = current_user.email
-        form.name.data             = current_user.name
+        form.name.data              = current_user.name
         form.bio.data               = current_user.bio
         form.github.data            = current_user.username
     return render_template('editProfile.html', title='Edit Profile', form=form, section=section)

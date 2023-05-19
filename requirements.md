@@ -1,17 +1,17 @@
 # Functional Requirements
 
 1. **Connect with any external API** (johnathon)
-2. Edit User Profiles
-3. Login account
-4. Delete chat messages (phillip)
-5. Send chat messages
-6. Create items for checklist
-7. Delete Account (dorian)
-8. Block User
-9. Create account
+2. Edit User Profiles (johnathon)
+3. Login account (johnathon)
+4. Delete chat messages (johnathon)
+5. Send chat messages (phillip)
+6. Create items for checklist (johnathon)
+7. Delete Account (johnathon)
+8. Block User (dorian)
+9. Create account (dorian)
 10. **Advance search items with regular expressions or filters by categories** (ryan)
-11. Search Chat Messages
-12. Change Password
+11. Search Chat Messages (ryan)
+12. Change Password (johnathon)
 
 
 ## Non-functional Requirements

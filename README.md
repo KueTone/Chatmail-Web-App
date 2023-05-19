@@ -17,6 +17,7 @@ Chatmail is a python email client with an integrated chat as well as a todo chec
 11. Search Chat Messages (ryan)
 12. Change Password (johnathon)
 
+
 ## Contributors
 
 - Johnathon Lu (@KueTone) Team Lead
@@ -28,7 +29,7 @@ Chatmail is a python email client with an integrated chat as well as a todo chec
 https://www.when2meet.com/?19639177-KJbMW
 
 ## Environment Setup
-For Mac devices
+
 1. Install python3
 2. Make a virtual environment (Venv)
 ```
@@ -47,6 +48,12 @@ venv\Scripts\activate
 ```
 pip install -r requirements.txt
 ```
+5. For filling / resetting database
+- Enter run.py
+- Uncomment lines 10-12 to delete current database values, save, then comment back
+- Uncomment line 7 to initiate with preset values, save, then comment back
+          - Initial database passwords can be found in database.py
+
 6. Generate a url
 ```
 python run.py

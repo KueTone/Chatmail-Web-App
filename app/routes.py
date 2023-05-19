@@ -36,7 +36,8 @@ def index():
     if (search==None):
         search = ""
     search1 = "%{}%".format(search)
-    posts = Post.query.filter(Post.body.like(search1)).order_by(desc(Post.id)).all()
+    # Main index page shows all posts that are directed at the current user
+    posts = Post.query.filter(Post.body.like(search1), Post.receive_id==current_user.id).order_by(desc(Post.id)).all()
     
 
     blocks = BlockList.query.all()
@@ -66,6 +67,7 @@ def indexU(user):
     if (search==None):
         search = ""
     search1 = "%{}%".format(search)
+    # Direct Messages index page shows all posts directed at the user from the recipient or vice versa
     posts = Post.query.filter(Post.body.like(search1),or_(Post.author_id==current_user.id,Post.author_id==receiveid),or_(Post.receive_id==receiveid,Post.receive_id==current_user.id)).order_by(desc(Post.id)).all()
     
     form = ComposeEmailForm()
@@ -78,6 +80,7 @@ def indexU(user):
         return redirect(url_for('indexU', user=user))
     return render_template('index.html', users=users, posts=posts, form=form)
   
+#   Main user profile page
 @myapp_obj.route('/profile/<username>/')
 @login_required
 def profile(username):

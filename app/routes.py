@@ -37,7 +37,10 @@ def index():
         search = ""
     search1 = "%{}%".format(search)
     # Main index page shows all posts that are directed at the current user
-    posts = Post.query.filter(Post.body.like(search1), Post.receive_id==current_user.id).order_by(desc(Post.id)).all()
+    if current_user.is_authenticated:
+        posts = Post.query.filter(Post.body.like(search1), Post.receive_id==current_user.id).order_by(desc(Post.id)).all()
+    else:
+        posts = []
     
 
     blocks = BlockList.query.all()
